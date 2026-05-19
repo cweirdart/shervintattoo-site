@@ -1,0 +1,3 @@
+# Netlify handles domain redirects (www → apex, alternate domains → primary)
+# automatically via domain settings in the Netlify dashboard.
+# No path-based redirects needed at this time.

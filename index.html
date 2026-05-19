@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tattooing by Shervin — Tattoo Artist in San Francisco, CA</title>
+  <meta name="description" content="Tattooing by Shervin — custom tattoo artist in San Francisco, California. Specializing in color, traditional, Japanese, and illustrative tattoo styles. Persian-inspired artwork. Book your appointment today.">
+  <meta name="keywords" content="tattoo, tattoo artist, San Francisco tattoo, California tattooing, Persian tattoo, custom tattoo, color tattoo, Japanese tattoo, traditional tattoo, illustrative tattoo, Shervin, SF tattoo, Bay Area tattoo">
+  <meta name="author" content="Shervin">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://shervintattoo.com/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tattooing by Shervin — Custom Tattoo Artist, San Francisco">
+  <meta property="og:description" content="Custom tattoo artist in San Francisco. Color, traditional, Japanese, and illustrative styles. Persian-inspired artwork. Book online.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shervintattoo.com/">
+  <meta property="og:image" content="https://shervintattoo.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Shervin tattoo business card featuring a hand-drawn dragon illustration">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Tattooing by Shervin">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tattooing by Shervin — San Francisco">
+  <meta name="twitter:description" content="Custom tattoo artist in San Francisco. Color, traditional, Japanese & illustrative styles. Book online.">
+  <meta name="twitter:image" content="https://shervintattoo.com/og-image.jpg">
+
+  <!-- Geo -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Parastoo:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Cloudflare Turnstile (invisible CAPTCHA for booking form) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    /* ============================================
+       SHERVIN TATTOO — v3
+       Built by c.weird / cweird.com
+       shervintattoo.com
+
+       Design: Dark parchment with warm brown header/footer.
+       Persian calligraphy logo + ornamental flowers.
+       ============================================ */
+
+    :root {
+      --color-paper: #161412;
+      --color-paper-dark: #0e0c0a;
+      --color-paper-light: #1e1b18;
+      --color-manuscript: #1a1714;
+      --color-ink: #d2cec6;
+      --color-ink-light: #a8a295;
+      --color-ink-faded: #706a5e;
+      --color-ink-ghost: #4a4438;
+      --color-accent: #b89a52;
+      --color-accent-hover: #d4b86a;
+      --color-gold: #8b7340;
+      --color-gold-light: #b89a52;
+      --color-gold-dim: #5a4a2a;
+      --color-green: #336633;
+      --color-green-light: #69d869;
+      --color-red: #4a8fbf;
+      --color-red-hover: #5eaadf;
+      --color-border: #2e2822;
+      --color-border-dark: #3d362c;
+      --color-dowel: #3a2f22;
+      --color-dowel-light: #5c4a34;
+      --color-dowel-dark: #1e1610;
+
+      --font-display: 'Cormorant Garamond', 'Georgia', serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-farsi: 'Parastoo', 'Cormorant Garamond', serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+
+      --max-width: 1100px;
+      --border-width: 28px;
+    }
+
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #0a0908;
+      overflow-x: hidden;
+      color: var(--color-ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      cursor: url('260412v2_grayblue_evileye_cursor.png') 16 16, auto;
+    }
+
+    /* Hide native cursor when JS custom cursor is active */
+    body.custom-cursor, body.custom-cursor * { cursor: none !important; }
+    body.custom-cursor input[type="text"],
+    body.custom-cursor input[type="email"],
+    body.custom-cursor input[type="tel"],
+    body.custom-cursor textarea { cursor: text !important; }
+
+    a, button, select, .gallery-item, .nav-toggle, label[for], .btn-buy, .btn-submit, .hero-cta { cursor: url('260412v2_grayblue_evileye_cursor.png') 16 16, pointer; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea { cursor: text !important; }
+
+    /* ---- Custom cursor hover glow ---- */
+    .cursor-dot {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      background: url('260412v2_grayblue_evileye_cursor.png') center/contain no-repeat;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, filter 0.2s ease;
+      display: none;
+    }
+
+    .cursor-dot.visible { display: block; }
+
+    .cursor-dot.hovering {
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 0 8px rgba(30, 144, 255, 0.9)) drop-shadow(0 0 18px rgba(30, 144, 255, 0.6)) drop-shadow(0 0 30px rgba(65, 170, 255, 0.35));
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--color-accent); text-decoration: none; transition: color 0.2s, text-shadow 0.2s; }
+    a:hover { color: var(--color-accent-hover); text-shadow: 0 0 8px rgba(184, 154, 82, 0.6); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-md); }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.15; color: var(--color-ink); }
+
+    /* ---- Utility ---- */
+    .label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-ink-faded);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: var(--space-lg) 0;
+    }
+
+    .divider--ornate {
+      border: none;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--color-gold-dim) 15%,
+        var(--color-gold) 50%,
+        var(--color-gold-dim) 85%,
+        transparent 100%
+      );
+      margin: var(--space-lg) auto;
+      max-width: 400px;
+      opacity: 0.6;
+    }
+
+    /* ---- Scroll Body (manuscript area) ---- */
+    .scroll-body {
+      position: relative;
+      background: var(--color-paper) url('paper-texture.jpg');
+      background-size: 512px 512px;
+      min-height: 100vh;
+      animation: unfurl 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+
+    @keyframes unfurl {
+      from {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0.6;
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+      }
+    }
+
+    /* Side borders removed in v3 */
+
+    /* ---- Contact Section ---- */
+    .contact-header {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+    .contact-header h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+    }
+
+    .contact-layout {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-lg);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    .contact-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--color-ink);
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .contact-side:hover { transform: translateY(-4px); }
+    .contact-side:hover .contact-side-img {
+      filter: drop-shadow(0 0 16px rgba(212, 184, 106, 0.8)) drop-shadow(0 0 36px rgba(212, 184, 106, 0.5));
+    }
+
+    .contact-side-img {
+      width: 180px;
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(212, 184, 106, 0.35));
+      transition: filter 0.3s;
+    }
+
+    .contact-side-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+    .contact-side:hover .contact-side-label {
+      color: var(--color-accent-hover);
+      text-shadow: 0 0 10px rgba(212, 184, 106, 0.5);
+    }
+
+    /* ---- Business Card 3D ---- */
+    .card-section {
+      padding: var(--space-xl) 0 var(--space-lg);
+      perspective: 1200px;
+      -webkit-perspective: 1200px;
+    }
+
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: center;
+    }
+
+    .card-scene {
+      width: 340px;
+      aspect-ratio: 1.75 / 1;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: pointer;
+    }
+
+    .card-body {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      /* rotation driven by JS requestAnimationFrame */
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-face img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .card-face--back { transform: rotateY(180deg); }
+
+    .card-hint {
+      margin-top: var(--space-sm);
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-ink-ghost);
+    }
+
+    /* ---- Card Lightbox ---- */
+    .card-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0, 0, 0, 0);
+      justify-content: center;
+      align-items: center;
+      perspective: 1400px;
+      -webkit-perspective: 1400px;
+      transition: background 0.4s ease;
+    }
+
+    .card-lightbox.open {
+      display: flex;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .card-lightbox-inner {
+      width: min(85vw, 620px);
+      aspect-ratio: 1.75 / 1;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    .card-body--lb {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+
+    .card-body--lb .card-face {
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+      pointer-events: none; /* prevent child faces from causing extra mouse events during 3D rotation */
+    }
+
+    .card-lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--color-paper);
+      font-size: 2.2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      z-index: 301;
+    }
+    .card-lightbox-close:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .card-scene { width: 280px; }
+      .card-lightbox-inner { width: 90vw; }
+    }
+
+    /* ---- Navigation / Parchment Header ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0;
+    }
+
+    .nav-bar {
+      background: var(--color-border);
+      background-image: url('paper-texture.jpg');
+      background-size: 512px 512px;
+      background-blend-mode: overlay;
+      padding: 0.65rem var(--space-md);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid var(--color-gold-dim);
+    }
+
+    nav .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Flower ornaments in header corners */
+    .nav-flower {
+      height: 28px;
+      width: auto;
+      opacity: 0.5;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    nav .logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-gold-light);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    nav .nav-links { display: flex; gap: var(--space-md); list-style: none; }
+    nav .nav-links a {
+      font-family: var(--font-mono);
+      color: var(--color-ink-light);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    nav .nav-links a:hover { color: var(--color-gold-light); }
+
+    .nav-toggle { display: none; background: none; border: none; color: var(--color-ink); font-size: 1.5rem; cursor: pointer; }
+
+    /* ---- Hero (Video) ---- */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 0;
+    }
+
+    #hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* dark parchment overlay */
+      background: linear-gradient(
+        to bottom,
+        rgba(22, 20, 18, 0.1) 0%,
+        rgba(22, 20, 18, 0.3) 50%,
+        rgba(22, 20, 18, 0.9) 85%,
+        rgba(22, 20, 18, 1) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 var(--space-md);
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      margin-bottom: var(--space-sm);
+      line-height: 0;
+    }
+
+    .hero-logo {
+      max-width: min(95vw, 1300px);
+      height: auto;
+      filter: drop-shadow(0 0 18px rgba(212, 184, 106, 0.95)) drop-shadow(0 0 40px rgba(212, 184, 106, 0.7)) drop-shadow(0 0 80px rgba(232, 204, 126, 0.5)) drop-shadow(0 0 130px rgba(232, 204, 126, 0.3));
+    }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 600;
+      font-size: clamp(1.1rem, 4.2vw, 1.7rem);
+      letter-spacing: 0.02em;
+      color: #fff;
+      margin: var(--space-xs) 0 var(--space-sm);
+      text-align: center;
+      white-space: nowrap;
+      text-shadow:
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 14px rgba(212, 184, 106, 0.7),
+        0 0 32px rgba(212, 184, 106, 0.4);
+    }
+
+    .hero-location {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 3.2vw, 1rem);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: var(--space-md);
+      text-shadow:
+        0 0 6px rgba(255, 240, 190, 1),
+        0 0 14px rgba(232, 204, 126, 0.95),
+        0 0 28px rgba(212, 184, 106, 0.85),
+        0 0 52px rgba(212, 184, 106, 0.55),
+        0 0 90px rgba(232, 204, 126, 0.35);
+    }
+
+    .hero-cta-group {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-sm);
+    }
+
+    .hero-farsi {
+      font-family: var(--font-farsi);
+      font-weight: 700;
+      font-size: clamp(1.25rem, 4.2vw, 1.7rem);
+      color: #fff;
+      margin: 0;
+      text-align: center;
+      text-shadow:
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 14px rgba(212, 184, 106, 0.7),
+        0 0 32px rgba(212, 184, 106, 0.4);
+      direction: rtl;
+      white-space: nowrap;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--color-accent);
+      color: var(--color-paper-dark);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .hero-cta:hover { background: var(--color-accent-hover); color: var(--color-paper-dark); box-shadow: 0 0 15px rgba(184, 154, 82, 0.6), 0 0 30px rgba(184, 154, 82, 0.3); }
+
+    /* ---- Work / Portfolio ---- */
+    #work { padding: var(--space-xl) 0; }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .work-header h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+    }
+
+    .gallery-filter {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .gallery-filter button {
+      padding: 0.4rem 1rem;
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-ink-faded);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: url('260412v2_grayblue_evileye_cursor.png') 16 16, pointer;
+      transition: all 0.2s;
+    }
+
+    .gallery-filter button:hover,
+    .gallery-filter button.active {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* ---- Carousel Gallery ---- */
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: rgba(22, 20, 18, 0.85);
+      color: var(--color-ink-light);
+      font-size: 1.2rem;
+      cursor: url('260412v2_grayblue_evileye_cursor.png') 16 16, pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(22, 20, 18, 0.95);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .carousel-arrow.prev { left: 8px; }
+    .carousel-arrow.next { right: 8px; }
+    .carousel-arrow:disabled { opacity: 0.3; pointer-events: none; }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+      will-change: transform;
+    }
+
+    .carousel-track.dragging {
+      transition: none;
+    }
+
+    .carousel-page {
+      flex: 0 0 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video { transform: scale(1.05); }
+
+    .gallery-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: var(--space-sm);
+      background: linear-gradient(to top, rgba(10, 8, 6, 0.92) 0%, rgba(10, 8, 6, 0.6) 55%, rgba(10, 8, 6, 0) 100%);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.5;
+      pointer-events: none;
+    }
+    .gallery-caption a {
+      color: var(--color-accent-hover);
+      text-decoration: underline;
+      pointer-events: auto;
+    }
+    .gallery-caption a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px rgba(212, 184, 106, 0.8);
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: var(--space-sm);
+      padding: var(--space-xs) 0;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-ink-ghost);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--color-ink-light);
+      transform: scale(1.25);
+    }
+
+    @media (max-width: 768px) {
+      .carousel-page { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ---- About ---- */
+    #about {
+      padding: var(--space-xl) 0;
+      background: rgba(30, 27, 24, 0.6);
+      border-top: 1px solid var(--color-gold-dim);
+      border-bottom: 1px solid var(--color-gold-dim);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .about-portrait {
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      max-width: 420px;
+    }
+
+    @media (min-width: 769px) {
+      .about-portrait {
+        max-width: 520px;
+      }
+    }
+
+    .about-portrait img {
+      width: 100%;
+      display: block;
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 300;
+      margin-bottom: var(--space-sm);
+    }
+
+    .about-text p {
+      color: var(--color-ink-light);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: var(--space-sm);
+      max-width: 550px;
+    }
+
+    .about-details {
+      margin-top: var(--space-md);
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .about-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .about-detail .label { margin-bottom: 0.15rem; }
+
+    .about-detail span {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-ink);
+    }
+
+    .about-contact-btn {
+      display: inline-block;
+      margin-top: 0.25rem;
+      padding: 0.55rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .about-contact-btn:hover {
+      background: var(--color-accent);
+      color: var(--color-paper-dark);
+      box-shadow: 0 0 15px rgba(184, 154, 82, 0.5);
+    }
+
+    /* ---- Booking ---- */
+    #booking { padding: var(--space-xl) 0; }
+
+    .booking-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      max-width: 600px;
+    }
+
+    .booking-step {
+      text-align: center;
+    }
+
+    .booking-step .step-num {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--color-gold-dim);
+      margin-bottom: 0.2rem;
+    }
+
+    .booking-step .step-text {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-ink-faded);
+    }
+
+    @media (max-width: 768px) {
+      .booking-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md) var(--space-sm);
+      }
+    }
+
+    .booking-header {
+      max-width: 560px;
+      margin-bottom: var(--space-lg);
+    }
+
+    .booking-header h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      margin-bottom: 0.25rem;
+    }
+
+    .booking-header .booking-subhead {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: var(--color-ink-light);
+      margin-bottom: var(--space-sm);
+    }
+
+    .booking-header p {
+      color: var(--color-ink-light);
+      line-height: 1.8;
+    }
+
+
+    form { max-width: 600px; }
+
+    .form-group { margin-bottom: var(--space-md); }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-ink-faded);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--color-paper-light);
+      border: 1px solid var(--color-border);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-ink-light);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--color-paper-light); }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+
+    .form-group .hint {
+      font-size: 0.75rem;
+      color: var(--color-ink-ghost);
+      margin-top: 0.3rem;
+    }
+
+    .form-group input[type="file"] {
+      padding: 0.65rem 1rem;
+      cursor: pointer;
+    }
+
+    .form-group input[type="file"]::file-selector-button {
+      padding: 0.4rem 1rem;
+      margin-right: 1rem;
+      background: var(--color-border-dark);
+      color: var(--color-ink);
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* Off-screen honeypot — position-based, not display:none (smart bots skip display:none) */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .btn-submit {
+      display: block;
+      width: 100%;
+      padding: 0.9rem 2rem;
+      margin-top: var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--color-accent);
+      color: var(--color-paper-dark);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-submit:hover { background: var(--color-accent-hover); color: var(--color-paper-dark); box-shadow: 0 0 15px rgba(184, 154, 82, 0.6), 0 0 30px rgba(184, 154, 82, 0.3); }
+
+    /* ---- Checkbox & Radio groups ---- */
+    .form-group .check-group,
+    .form-group .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-top: 0.3rem;
+    }
+
+    .form-group .check-group label,
+    .form-group .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--color-ink-light);
+      cursor: pointer;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-paper-light);
+      transition: all 0.2s;
+    }
+
+    .form-group .check-group label:hover,
+    .form-group .radio-group label:hover {
+      border-color: var(--color-ink-faded);
+    }
+
+    .form-group .check-group input:checked + span,
+    .form-group .radio-group input:checked + span {
+      color: var(--color-ink);
+    }
+
+    .form-group .check-group label:has(input:checked),
+    .form-group .radio-group label:has(input:checked) {
+      border-color: var(--color-ink);
+      background: var(--color-paper);
+    }
+
+    .form-group .check-group input,
+    .form-group .radio-group input {
+      accent-color: var(--color-ink);
+      width: auto;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    .form-success {
+      display: none;
+      padding: var(--space-lg) 0;
+    }
+
+    .form-success h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: var(--space-sm);
+    }
+
+    .form-success p { color: var(--color-ink-light); }
+
+    /* ---- Shop ---- */
+    #shop {
+      padding: var(--space-xl) 0;
+      background: rgba(30, 27, 24, 0.6);
+      border-top: 1px solid var(--color-gold-dim);
+      border-bottom: 1px solid var(--color-gold-dim);
+    }
+
+    .shop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-md);
+    }
+
+    .shop-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 300;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: var(--space-md);
+    }
+
+    .shop-item {
+      border: 1px solid var(--color-border);
+      background: var(--color-paper);
+      transition: transform 0.2s;
+    }
+
+    .shop-item:hover { transform: translateY(-2px); }
+
+    .shop-item-image {
+      aspect-ratio: 1;
+      background: var(--color-paper-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-ink-ghost);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .shop-item-info { padding: var(--space-sm); }
+
+    .shop-item-info h3 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .shop-item-info .price {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-ink-faded);
+      margin-bottom: var(--space-sm);
+    }
+
+    .shop-item-info .btn-buy {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-ink);
+      color: var(--color-ink);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .shop-item-info .btn-buy:hover {
+      background: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    .shop-item-info .btn-buy.sold-out {
+      border-color: var(--color-ink-ghost);
+      color: var(--color-ink-ghost);
+      cursor: default;
+      pointer-events: none;
+      text-decoration: line-through;
+    }
+
+    /* ---- Footer / Parchment Bar ---- */
+    footer {
+      position: relative;
+      padding: 0;
+    }
+
+    .footer-bar {
+      background: var(--color-border);
+      background-image: url('paper-texture.jpg');
+      background-size: 512px 512px;
+      background-blend-mode: overlay;
+      padding: 1rem var(--space-md);
+      box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.5);
+      border-top: 1px solid var(--color-gold-dim);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-md);
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-ink-faded);
+    }
+    .footer-links a:hover { color: var(--color-gold-light); }
+
+    .footer-credit {
+      font-size: 0.75rem;
+      color: var(--color-ink-ghost);
+    }
+
+    /* ---- Lightbox ---- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10, 9, 8, 0.94);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    /* Overlay caption sits on top of the lightbox image/video, anti-screenshot */
+    .lightbox-caption {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      max-width: min(88vw, 640px);
+      padding: var(--space-md) var(--space-md);
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.4vw, 1.1rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.6;
+      background: rgba(10, 8, 6, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(212, 184, 106, 0.35);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .lightbox-caption.active { display: block; }
+    .lightbox-caption a {
+      color: var(--color-accent-hover);
+      text-decoration: underline;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .lightbox-caption a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(212, 184, 106, 0.9);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--color-paper);
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 768px) {
+      nav .nav-links { display: none; }
+      nav .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(22, 20, 18, 0.98);
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .nav-flower { height: 22px; }
+      .nav-toggle { display: block; }
+
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-portrait { max-width: 280px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+
+      /* Uniform, tighter section spacing on mobile */
+      #about, #work, #booking, #shop {
+        padding: var(--space-md) 0;
+      }
+      .card-section {
+        padding: var(--space-md) 0 var(--space-sm);
+      }
+      /* Shrink header-to-content margin on mobile booking too */
+      .booking-header {
+        margin-bottom: var(--space-md);
+      }
+      .work-header {
+        margin-bottom: var(--space-sm);
+      }
+
+      /* Contact: stack pomegranate → card → skull vertically on mobile */
+      .contact-layout {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      .contact-side-img {
+        width: 130px;
+      }
+    }
+
+    /* ---- Animations ---- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TattooParlor",
+    "name": "Tattooing by Shervin",
+    "alternateName": ["Shervin Tattoo", "Persian Tattoo", "California Tattooing"],
+    "url": "https://shervintattoo.com",
+    "sameAs": [
+      "https://instagram.com/shervin.510",
+      "https://persiantattoo.com",
+      "https://californiatattooing.com"
+    ],
+    "image": "https://shervintattoo.com/TattooingByServin_logo+flowers.png",
+    "logo": "https://shervintattoo.com/TattooingByServin_logo+flowers.png",
+    "description": "Custom tattoo artist in San Francisco, California. Specializing in color, traditional, Japanese, and illustrative tattoo styles with Persian-inspired artwork.",
+    "email": "shervinx510@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Francisco",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "areaServed": [
+      { "@type": "City", "name": "San Francisco" },
+      { "@type": "State", "name": "California" }
+    ],
+    "knowsAbout": ["tattoo", "color tattoo", "Japanese tattoo", "traditional tattoo", "illustrative tattoo", "Persian art", "custom tattoo design"],
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ======== NAVIGATION / PARCHMENT HEADER ======== -->
+  <nav aria-label="Main navigation">
+    <div class="nav-bar">
+    <div class="nav-inner">
+      <img src="Shervin_flower_left.png" alt="" class="nav-flower" aria-hidden="true">
+      <a href="#hero" class="logo">Tattooing by Shervin</a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#booking">Booking</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <img src="Shervin_flower_right.png" alt="" class="nav-flower" aria-hidden="true">
+    </div>
+    </div>
+  </nav>
+
+  <!-- ======== SCROLL BODY (manuscript area) ======== -->
+  <div class="scroll-body">
+
+  <!-- ======== HERO ======== -->
+  <section id="hero">
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content fade-in">
+      <h1><img src="TattooingByServin_logo+flowers.png" alt="Tattooing by Shervin" class="hero-logo" width="1040" height="390"></h1>
+      <p class="hero-tagline">Gifts from West Asia and the West Coast.</p>
+      <p class="hero-location">San Francisco, California</p>
+      <div class="hero-cta-group">
+        <a href="#booking" class="hero-cta">Book a Tattoo</a>
+        <p class="hero-farsi" lang="fa" dir="rtl">یکی بود یکی نبود، فقط شما &#x26B1;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== ABOUT ======== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-portrait fade-in">
+          <img src="Shervin_Polaroid_bycweird.jpeg" alt="Shervin — tattoo artist portrait, San Francisco">
+        </div>
+        <div class="about-text fade-in">
+          <p class="label">About</p>
+          <h2>Shervin</h2>
+          <p>Based out of San Francisco, Shervin is a Bay Area native Iranian American tattooer and artist. Rooted in heavy traditional forms from all cultures, each piece is catered and shaped to fit and empower people through every step.</p>
+          <p>Currently taking all appointments out of <strong>Analog Tattoo Art Kolectiv</strong> — 1038 Larkin St, San Francisco, CA 94109, Thurs–Sun.</p>
+          <p>Bookings open below and walk ins are always open based on availability.</p>
+
+          <div class="about-details">
+            <div class="about-detail">
+              <p class="label">Based in</p>
+              <span>San Francisco, CA</span>
+            </div>
+            <div class="about-detail">
+              <p class="label">Specialties</p>
+              <span>Color, Black &amp; Grey, Traditional, Japanese, West Asian, Persian, Illustrative, Tribal, Ornamental, Custom, Freehand</span>
+            </div>
+            <div class="about-detail">
+              <p class="label">Contact</p>
+              <a href="#contact" class="about-contact-btn">Contact &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== WORK ======== -->
+  <section id="work">
+    <div class="container">
+      <div class="work-header">
+        <h2 class="fade-in">Work</h2>
+      </div>
+
+      <div class="gallery-filter fade-in">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="black-and-grey">Black and Grey</button>
+        <button data-filter="color">Color</button>
+        <button data-filter="flash">Flash</button>
+      </div>
+
+      <div class="carousel-wrap fade-in" id="gallery-carousel">
+        <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous">&#8249;</button>
+        <button class="carousel-arrow next" id="carousel-next" aria-label="Next">&#8250;</button>
+        <div class="carousel-track" id="carousel-track">
+          <!-- Page 1 (items 1-6) -->
+          <div class="carousel-page">
+            <div class="gallery-item gallery-item--captioned" data-category="flash">
+              <video src="hero-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+              <p class="gallery-caption">300+ pages of flash&mdash;<a href="#booking">Book</a> to view in person</p>
+            </div>
+            <div class="gallery-item" data-category="color"><img src="Work/1%20Shervin_tattooing_byextraekster.jpg" alt="Shervin tattooing at his San Francisco studio" loading="lazy"></div>
+            <div class="gallery-item" data-category="color"><img src="Work/2%20Shervin_tattooing_byextraekster.jpg" alt="Shervin tattooing a custom piece" loading="lazy"></div>
+            <div class="gallery-item" data-category="color"><img src="Work/3%20Shervin_tattooing_byextraekster.jpg" alt="Shervin tattooing at his San Francisco studio" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/4%2020260403_140729.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/5%2020260315_205332.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><video src="Work/6%2020260315_205439.mp4" muted loop playsinline webkit-playsinline preload="auto"></video></div>
+          </div>
+          <!-- Page 2 (items 7-12) -->
+          <div class="carousel-page">
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/7%2020260402_225211.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="color black-and-grey"><img src="Work/8%20cweird_dragon_scarygary.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item"><img src="Work/9%2020250731_215302.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/10%2020250704_141204.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/11%2020251116_175420.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><video src="Work/12%2020251116_175438.mp4" muted loop playsinline webkit-playsinline preload="auto"></video></div>
+          </div>
+          <!-- Page 3 (items 13-18) -->
+          <div class="carousel-page">
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/13%2020260405_190159.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/14%2020251113_171308.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/15%2020251211_183508.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/16%2020260305_151402.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/17%2020260305_232108.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item"><img src="Work/18%20IMG_20250615_110846_326.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+          </div>
+          <!-- Page 4 (item 19) -->
+          <div class="carousel-page">
+            <div class="gallery-item"><img src="Work/19%20IMG_20240713_192506.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== BOOKING ======== -->
+  <section id="booking">
+    <div class="container">
+      <div class="booking-header fade-in">
+        <h2>Booking</h2>
+        <p class="booking-subhead">Get Tattooed</p>
+        <p>Thank you for your interest in booking. I'm grateful and excited to hear of your ideas for your next tattoo. Please fill out the form the best of your ability and if approved we can move on to the next steps. Feel free to mention anything not listed and please be patient with all responses as I am a one man operation. Always with love and respect &#x1F64F;&#x1F3FD;&#x1F4FF;&#x1F33F;</p>
+      </div>
+
+      <div class="booking-steps fade-in">
+        <div class="booking-step">
+          <span class="step-num">1</span>
+          <span class="step-text">Submit your idea</span>
+        </div>
+        <div class="booking-step">
+          <span class="step-num">2</span>
+          <span class="step-text">Review &amp; approve</span>
+        </div>
+        <div class="booking-step">
+          <span class="step-num">3</span>
+          <span class="step-text">Send deposit</span>
+        </div>
+        <div class="booking-step">
+          <span class="step-num">4</span>
+          <span class="step-text">Get tattooed</span>
+        </div>
+      </div>
+
+      <form id="booking-form" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+        <input type="hidden" name="form-name" value="booking">
+        <!-- Netlify's native honeypot (server-side filtered) -->
+        <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <!-- Secondary honeypot — off-screen, not display:none. Checked in JS on submit. -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="website-url">Website</label>
+          <input type="text" id="website-url" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="client-name">Name *</label>
+            <input type="text" id="client-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="client-email">Email *</label>
+            <input type="email" id="client-email" name="email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="client-phone">Phone *</label>
+          <input type="tel" id="client-phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-subject">Subject matter (what would you like tattooed?) *</label>
+          <textarea id="tattoo-subject" name="subject" required placeholder="Describe your concept, meaning, style references — anything that helps me understand your vision."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tattoo-placement">Placement *</label>
+            <select id="tattoo-placement" name="placement" required>
+              <option value="" disabled selected>Select area</option>
+              <option value="arm-upper">Upper Arm</option>
+              <option value="arm-lower">Lower Arm / Forearm</option>
+              <option value="sleeve">Full Sleeve</option>
+              <option value="hand">Hand / Fingers</option>
+              <option value="chest">Chest</option>
+              <option value="back-upper">Upper Back</option>
+              <option value="back-full">Full Back</option>
+              <option value="ribs">Ribs / Side</option>
+              <option value="stomach">Stomach</option>
+              <option value="leg-upper">Upper Leg / Thigh</option>
+              <option value="leg-lower">Lower Leg / Calf</option>
+              <option value="foot">Foot / Ankle</option>
+              <option value="neck">Neck</option>
+              <option value="other">Other (describe above)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tattoo-size">Approximate Size *</label>
+            <select id="tattoo-size" name="size" required>
+              <option value="" disabled selected>Select size</option>
+              <option value="small">Small (0.5-4 inches)</option>
+              <option value="medium">Medium (4-6 inches)</option>
+              <option value="large">Large (6-10 inches)</option>
+              <option value="xl">Extra Large (10+ inches)</option>
+              <option value="full-piece">Full piece (back, sleeve, etc.)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-style">Style of tattoo *</label>
+          <select id="tattoo-style" name="style" required>
+            <option value="" disabled selected>Select style</option>
+            <option value="flash">Flash tattoo</option>
+            <option value="american-traditional">American Traditional</option>
+            <option value="persian">Persian</option>
+            <option value="cjk">Chinese, Japanese, Korean</option>
+            <option value="chicano">Chicano</option>
+            <option value="illustrative">Illustrative</option>
+            <option value="fine-line">Fine line</option>
+            <option value="tribal">Tribal (Sak yantra, Borneo, Polynesian inspired etc)</option>
+            <option value="calligraphy">Calligraphy / lettering (all languages)</option>
+            <option value="ornamental">Ornamental</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Day of week preference *</label>
+          <p class="hint" style="margin-bottom:0.4rem;">Choose multiple if you have that flexibility.</p>
+          <div class="check-group">
+            <label><input type="checkbox" name="day_pref" value="thursday"><span>Thursday</span></label>
+            <label><input type="checkbox" name="day_pref" value="friday"><span>Friday</span></label>
+            <label><input type="checkbox" name="day_pref" value="saturday"><span>Saturday</span></label>
+            <label><input type="checkbox" name="day_pref" value="sunday"><span>Sunday</span></label>
+            <label><input type="checkbox" name="day_pref" value="any"><span>Any day, anytime!</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-color">Color or Black and Grey *</label>
+          <select id="tattoo-color" name="color_pref" required>
+            <option value="" disabled selected>Select</option>
+            <option value="black-grey">Black and Grey</option>
+            <option value="color">Color</option>
+            <option value="either">Open to either</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-references">Reference images</label>
+          <input type="file" id="tattoo-references" name="references" multiple accept="image/*">
+          <p class="hint">Upload photos from your camera roll or take a new photo. Multiple images welcome.</p>
+          <p class="hint">Upload your images to Google Drive, Imgur, or any image host and share the links here.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-allergies">Any known allergies? *</label>
+          <input type="text" id="tattoo-allergies" name="allergies" required placeholder="Put N/A if none">
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-medical">Any medical history I should be made aware of? *</label>
+          <input type="text" id="tattoo-medical" name="medical" required placeholder="Put N/A if none">
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-travel">Travel list</label>
+          <textarea id="tattoo-travel" name="travel" placeholder="If unable to come to SF, CA — provide your location and you can be added to my travel list for when I'm in your city, state, or country. I guest spot all over the world so don't be shy!"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tattoo-notes">Anything else?</label>
+          <textarea id="tattoo-notes" name="additional_notes" placeholder="Any other details, questions, or things you'd like me to know."></textarea>
+        </div>
+
+        <!-- Cloudflare Turnstile widget — invisible unless a challenge is needed.
+             Replace data-sitekey value with your Turnstile site key from the
+             Cloudflare dashboard. -->
+        <div class="cf-turnstile"
+             data-sitekey="0x4AAAAAADARctDFmUYGMiqL"
+             data-appearance="interaction-only"
+             style="margin-bottom: var(--space-sm);"></div>
+
+        <button type="submit" class="btn-submit">Submit Request</button>
+      </form>
+      <div class="form-success" id="form-success">
+        <h3>Request received</h3>
+        <p>Thanks for reaching out. I'll review your request and follow up within a few days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SHOP ======== -->
+  <section id="shop">
+    <div class="container">
+      <div class="shop-header">
+        <h2 class="fade-in">Shop</h2>
+        <p class="label fade-in">Prints &amp; merch</p>
+      </div>
+
+      <div class="shop-grid">
+        <div class="shop-item fade-in">
+          <div class="shop-item-image">Sold out</div>
+          <div class="shop-item-info">
+            <h3>Limited Edition Flash Sheet 1/50</h3>
+            <p class="price">$80</p>
+            <button class="btn-buy sold-out" disabled>Sold Out</button>
+          </div>
+        </div>
+        <div class="shop-item fade-in">
+          <div class="shop-item-image">Sold out</div>
+          <div class="shop-item-info">
+            <h3>&ldquo;DIASPORA&rdquo; Limited Edition Shirt</h3>
+            <p class="price">$40</p>
+            <button class="btn-buy sold-out" disabled>Sold Out</button>
+          </div>
+        </div>
+        <div class="shop-item fade-in">
+          <div class="shop-item-image">Sold out</div>
+          <div class="shop-item-info">
+            <h3>Stoneware Vessel Vol. 1</h3>
+            <p class="price">$120</p>
+            <button class="btn-buy sold-out" disabled>Sold Out</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======== LIGHTBOX ======== -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <!-- ======== CONTACT / BUSINESS CARD ======== -->
+  <section class="card-section" id="contact">
+    <div class="container">
+      <div class="contact-header fade-in">
+        <h2>Contact</h2>
+      </div>
+    </div>
+    <div class="contact-layout">
+      <a href="mailto:shervinx510@gmail.com" class="contact-side fade-in" aria-label="Email Shervin">
+        <img src="shervin-pomegranate.png" alt="Pomegranate illustration" class="contact-side-img">
+        <span class="contact-side-label">Email</span>
+      </a>
+      <div class="card-wrap">
+        <div class="card-scene" id="card-scene">
+          <div class="card-body" id="card-body">
+            <div class="card-face card-face--front">
+              <img src="Shervin_businesscard_2.jpg" alt="Shervin tattoo business card — hand-drawn Persian dragon illustration" draggable="false">
+            </div>
+            <div class="card-face card-face--back">
+              <img src="Shervin_businesscard_1.jpg" alt="Shervin tattoo business card — Persian calligraphy, skull art, booking and contact details" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="https://instagram.com/shervin.510" target="_blank" rel="noopener" class="contact-side fade-in" aria-label="Instagram @shervin.510">
+        <img src="shervin-skull.png" alt="Skull illustration" class="contact-side-img">
+        <span class="contact-side-label">Instagram</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Card lightbox overlay -->
+  <div class="card-lightbox" id="card-lightbox">
+    <div class="card-lightbox-inner" id="card-lightbox-scene">
+      <div class="card-body card-body--lb" id="card-body-lb">
+        <div class="card-face card-face--front">
+          <img src="Shervin_businesscard_2.jpg" alt="Shervin tattoo business card — hand-drawn Persian dragon illustration" draggable="false">
+        </div>
+        <div class="card-face card-face--back">
+          <img src="Shervin_businesscard_1.jpg" alt="Shervin tattoo business card — Persian calligraphy, skull art, booking and contact details" draggable="false">
+        </div>
+      </div>
+    </div>
+    <button class="card-lightbox-close" id="card-lb-close" aria-label="Close">&times;</button>
+  </div>
+
+  </div><!-- /.scroll-body -->
+
+  <!-- ======== FOOTER / PARCHMENT BAR ======== -->
+  <footer>
+    <div class="footer-bar">
+      <div class="footer-inner">
+        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site + Headshot by <a href="https://cweird.com" rel="noopener">c.weird:</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== SCRIPTS ======== -->
+  <script>
+    // ---- Scroll Animations ----
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ---- Form (Netlify Forms via fetch, multipart for file uploads) ----
+    // Anti-spam: record when the form loaded so we can reject instant submits
+    const BOOKING_FORM_LOADED_AT = Date.now();
+    const BOOKING_MIN_FILL_SECONDS = 3;
+
+    function showBookingSuccess() {
+      const form = document.getElementById('booking-form');
+      form.style.display = 'none';
+      const success = document.getElementById('form-success');
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      const data = new FormData(form);
+
+      // Spam check 1: secondary honeypot must be empty
+      const honeypot = form.querySelector('input[name="website"]');
+      const honeypotTripped = honeypot && honeypot.value.trim() !== '';
+
+      // Spam check 2: form filled out suspiciously fast (bots submit in ms)
+      const elapsedSeconds = (Date.now() - BOOKING_FORM_LOADED_AT) / 1000;
+      const tooFast = elapsedSeconds < BOOKING_MIN_FILL_SECONDS;
+
+      // Spam check 3: SEO-agency bots stuff a domain into the name field
+      // (e.g. "Hello persiantattoo.com, I spent some time..."). Real names
+      // never contain URLs, .com/.net/.org, or email-like tokens.
+      const nameValue = (form.querySelector('input[name="name"]') || {}).value || '';
+      const nameLooksLikeSpam = /https?:\/\/|www\.|\.(com|net|org|io|co|biz|info)\b|@/i.test(nameValue);
+
+      // Spam check 4: message contains 3+ URLs (real customers rarely do this)
+      const subjectValue = (form.querySelector('textarea[name="subject"]') || {}).value || '';
+      const urlMatches = subjectValue.match(/https?:\/\/|www\./gi) || [];
+      const tooManyUrls = urlMatches.length >= 3;
+
+      // Spam check 5: Cloudflare Turnstile token must be present.
+      // Turnstile injects a hidden input named "cf-turnstile-response" into the
+      // form when it successfully verifies the visitor. No token = bot (or the
+      // widget never loaded, e.g. JS-off bot).
+      const turnstileInput = form.querySelector('input[name="cf-turnstile-response"]');
+      const turnstileToken = turnstileInput && turnstileInput.value;
+      const turnstileMissing = !turnstileToken;
+
+      if (honeypotTripped || tooFast || nameLooksLikeSpam || tooManyUrls || turnstileMissing) {
+        // Silent success — bots think they got through so they don't retry with mutations
+        showBookingSuccess();
+        return;
+      }
+
+      fetch('/', {
+        method: 'POST',
+        body: data
+      }).then(showBookingSuccess).catch(showBookingSuccess);
+    });
+
+    // ---- Carousel Gallery + Filter (dynamic pagination) ----
+    (() => {
+      const track = document.getElementById('carousel-track');
+      const dotsWrap = document.getElementById('carousel-dots');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
+      if (!track || !dotsWrap) return;
+
+      const PAGE_SIZE = 6;
+      // Snapshot all gallery items once, in original order
+      const allItems = Array.from(track.querySelectorAll('.gallery-item'));
+      let currentFilter = 'all';
+      let current = 0;
+      let pageCount = 0;
+
+      function matchesFilter(item, filter) {
+        if (filter === 'all') return true;
+        const cats = (item.dataset.category || '').split(' ').filter(Boolean);
+        return cats.includes(filter);
+      }
+
+      function rebuild(filter) {
+        currentFilter = filter;
+        const visible = allItems.filter(it => matchesFilter(it, filter));
+        // Clear track and rebuild pages
+        track.innerHTML = '';
+        pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+        for (let p = 0; p < pageCount; p++) {
+          const page = document.createElement('div');
+          page.className = 'carousel-page';
+          for (let i = p * PAGE_SIZE; i < Math.min((p + 1) * PAGE_SIZE, visible.length); i++) {
+            page.appendChild(visible[i]);
+          }
+          track.appendChild(page);
+        }
+        // Rebuild dots
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < pageCount; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot';
+          dot.setAttribute('aria-label', 'Page ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(dot);
+        }
+        // Hide dots/arrows if only one page
+        dotsWrap.style.display = pageCount <= 1 ? 'none' : '';
+        if (prevBtn) prevBtn.style.display = pageCount <= 1 ? 'none' : '';
+        if (nextBtn) nextBtn.style.display = pageCount <= 1 ? 'none' : '';
+        goTo(0);
+      }
+
+      function updateArrows() {
+        if (prevBtn) prevBtn.disabled = current === 0;
+        if (nextBtn) nextBtn.disabled = current === pageCount - 1;
+      }
+
+      function goTo(idx) {
+        current = Math.max(0, Math.min(idx, pageCount - 1));
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        updateArrows();
+        // Play/pause videos based on visibility
+        track.querySelectorAll('.carousel-page').forEach((page, i) => {
+          page.querySelectorAll('video').forEach(v => {
+            if (i === current) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+            else v.pause();
+          });
+        });
+      }
+
+      // Arrow handlers
+      if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      // Touch swipe
+      let startX = 0, startY = 0, isDragging = false;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; isDragging = true; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        if (!isDragging) return;
+        isDragging = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+          goTo(current + (dx < 0 ? 1 : -1));
+        }
+      });
+
+      // Mouse drag
+      let mStartX = 0;
+      track.addEventListener('mousedown', e => { mStartX = e.clientX; track.classList.add('dragging'); });
+      document.addEventListener('mouseup', e => {
+        if (!track.classList.contains('dragging')) return;
+        track.classList.remove('dragging');
+        const dx = e.clientX - mStartX;
+        if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+      });
+
+      // Filter buttons drive a full rebuild
+      document.querySelectorAll('.gallery-filter button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelector('.gallery-filter button.active').classList.remove('active');
+          btn.classList.add('active');
+          rebuild(btn.dataset.filter);
+        });
+      });
+
+      // Initial build
+      rebuild('all');
+    })();
+
+    // ---- Lightbox ----
+    function setLightboxCaption(fromItem) {
+      const lbCap = document.getElementById('lightbox-caption');
+      if (!lbCap) return;
+      const cap = fromItem && fromItem.querySelector('.gallery-caption');
+      if (cap) {
+        lbCap.innerHTML = cap.innerHTML;
+        lbCap.classList.add('active');
+      } else {
+        lbCap.innerHTML = '';
+        lbCap.classList.remove('active');
+      }
+    }
+
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-img').alt = img.alt;
+        setLightboxCaption(img.closest('.gallery-item'));
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Videos open lightbox too (as poster frame)
+    document.querySelectorAll('.gallery-item video').forEach(vid => {
+      vid.style.cursor = 'zoom-in';
+      vid.addEventListener('click', e => {
+        e.preventDefault();
+        // Use the video element in lightbox
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        lbImg.src = '';
+        lbImg.alt = 'Tattoo video by Shervin';
+        // Create temp video in lightbox
+        let lbVid = lb.querySelector('video');
+        if (!lbVid) {
+          lbVid = document.createElement('video');
+          lbVid.style.maxWidth = '90vw';
+          lbVid.style.maxHeight = '90vh';
+          lbVid.setAttribute('controls', '');
+          lbVid.setAttribute('autoplay', '');
+          lbVid.setAttribute('muted', '');
+          lbVid.setAttribute('playsinline', '');
+          lb.appendChild(lbVid);
+        }
+        lbVid.src = vid.src;
+        lbVid.style.display = 'block';
+        lbImg.style.display = 'none';
+        setLightboxCaption(vid.closest('.gallery-item'));
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      const lbVid = lb.querySelector('video');
+      if (lbVid) { lbVid.pause(); lbVid.style.display = 'none'; }
+      const lbImg = document.getElementById('lightbox-img');
+      if (lbImg) lbImg.style.display = '';
+      const lbCap = document.getElementById('lightbox-caption');
+      if (lbCap) { lbCap.innerHTML = ''; lbCap.classList.remove('active'); }
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ---- Business Card ----
+    // Y-axis only. Click = single flip. No idle spinning.
+    (() => {
+      const smallScene = document.getElementById('card-scene');
+      const smallBody = document.getElementById('card-body');
+      const lb = document.getElementById('card-lightbox');
+      const lbBody = document.getElementById('card-body-lb');
+      const lbScene = document.getElementById('card-lightbox-scene');
+      const lbClose = document.getElementById('card-lb-close');
+      if (!smallScene || !lb || !lbBody) return;
+
+      let smallAngle = 0;
+      let flipLock = false;
+      let lbOpen = false;
+
+      // No idle spinning — card is static until clicked
+      smallBody.style.transform = `rotateY(0deg)`;
+
+      function flipSmall() {
+        if (flipLock) return;
+        flipLock = true;
+        const target = smallAngle + 180;
+        smallBody.style.transition = 'transform 0.5s ease';
+        smallBody.style.transform = `rotateY(${target}deg)`;
+        setTimeout(() => {
+          smallBody.style.transition = 'none';
+          smallAngle = target;
+          flipLock = false;
+        }, 520);
+      }
+
+      // Small: click → flip once (not open lightbox)
+      smallScene.addEventListener('click', () => { flipSmall(); });
+
+      /* ===== LIGHTBOX ===== */
+      let lbAngle = 0;
+      let lbFlipLock = false;
+
+      function setLB(angle, animate) {
+        lbAngle = angle;
+        lbBody.style.transition = animate ? 'transform 0.5s ease' : 'none';
+        lbBody.style.transform = `rotateY(${lbAngle}deg)`;
+      }
+
+      function flipLBY() {
+        if (lbFlipLock) return;
+        lbFlipLock = true;
+        setLB(lbAngle + 180, true);
+        setTimeout(() => { lbFlipLock = false; }, 520);
+      }
+
+      function openLB() {
+        lbOpen = true;
+        smallScene.style.visibility = 'hidden';
+        lbBody.querySelector('.card-face--back').style.transform = 'rotateY(180deg)';
+        lbAngle = 0;
+        lbBody.style.transition = 'none';
+        lbBody.style.transform = 'rotateY(-90deg) scale(0.8)';
+        lb.style.display = 'flex';
+        void lbBody.offsetWidth;
+        requestAnimationFrame(() => {
+          lb.classList.add('open');
+          setLB(0, true);
+        });
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLB() {
+        lb.classList.remove('open');
+        lbOpen = false;
+        document.body.style.overflow = '';
+        smallScene.style.visibility = '';
+        setTimeout(() => { lb.style.display = 'none'; }, 400);
+      }
+
+      lbClose.addEventListener('click', e => { e.stopPropagation(); closeLB(); });
+      lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && lbOpen) closeLB(); });
+
+      // Lightbox: click card → Y-axis flip only
+      lbScene.addEventListener('click', e => {
+        e.stopPropagation();
+        flipLBY();
+      });
+
+      // Lightbox: touch swipe → Y-axis flip
+      let lTX = 0;
+      lbScene.addEventListener('touchstart', e => { lTX = e.touches[0].clientX; }, { passive: true });
+      lbScene.addEventListener('touchend', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - lTX);
+        if (dx > 40) flipLBY();
+      });
+    })();
+
+    // ---- Force hero video loop + mobile autoplay fallback ----
+    (() => {
+      const heroVid = document.querySelector('#hero video');
+      if (!heroVid) return;
+
+      // Make sure attributes that matter for mobile autoplay are set
+      heroVid.muted = true;
+      heroVid.defaultMuted = true;
+      heroVid.setAttribute('muted', '');
+      heroVid.setAttribute('playsinline', '');
+      heroVid.setAttribute('webkit-playsinline', '');
+
+      const tryPlay = () => {
+        const p = heroVid.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      };
+
+      // Attempt play immediately and again when the video is ready
+      tryPlay();
+      heroVid.addEventListener('loadedmetadata', tryPlay);
+      heroVid.addEventListener('canplay', tryPlay);
+
+      // If autoplay was blocked (iOS Low Power Mode, etc.), kick it off
+      // on the first user interaction anywhere on the page.
+      const kickstart = () => {
+        if (heroVid.paused) tryPlay();
+      };
+      ['touchstart', 'touchend', 'click', 'scroll'].forEach(ev => {
+        document.addEventListener(ev, kickstart, { once: true, passive: true });
+      });
+
+      // Keep it looping (some mobile browsers stop at end)
+      heroVid.addEventListener('ended', () => { heroVid.currentTime = 0; tryPlay(); });
+      heroVid.addEventListener('pause', () => {
+        if (document.visibilityState === 'visible') {
+          setTimeout(() => { if (heroVid.paused) tryPlay(); }, 120);
+        }
+      });
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && heroVid.paused) tryPlay();
+      });
+    })();
+
+    // ---- Autoplay gallery videos when scrolled into view ----
+    (() => {
+      const vids = document.querySelectorAll('.gallery-item video');
+      if (!vids.length || !('IntersectionObserver' in window)) return;
+      vids.forEach(v => {
+        v.muted = true;
+        v.setAttribute('muted', '');
+        v.setAttribute('playsinline', '');
+        v.setAttribute('webkit-playsinline', '');
+        v.setAttribute('loop', '');
+      });
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const v = entry.target;
+          if (entry.isIntersecting) {
+            const p = v.play();
+            if (p && typeof p.catch === 'function') p.catch(() => {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.25 });
+      vids.forEach(v => io.observe(v));
+    })();
+
+    // ---- Smooth scroll ----
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          document.querySelector('.nav-links').classList.remove('open');
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+  <!-- Custom cursor overlay -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <script>
+    (() => {
+      const dot = document.getElementById('cursor-dot');
+      const hoverables = 'a, button, select, .gallery-item, .nav-toggle, label[for], .btn-buy, .btn-submit, .hero-cta, input[type="file"]';
+      let isTouch = false;
+
+      window.addEventListener('touchstart', () => { isTouch = true; }, { once: true });
+
+      document.addEventListener('mousemove', e => {
+        if (isTouch) return;
+        document.body.classList.add('custom-cursor');
+        dot.classList.add('visible');
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+      });
+
+      const textInputs = 'input[type="text"], input[type="email"], input[type="tel"], textarea';
+
+      document.addEventListener('mouseover', e => {
+        if (e.target.closest(textInputs)) { dot.classList.remove('visible'); return; }
+        if (e.target.closest(hoverables)) dot.classList.add('hovering');
+      });
+
+      document.addEventListener('mouseout', e => {
+        if (e.target.closest(textInputs)) dot.classList.add('visible');
+        if (e.target.closest(hoverables)) dot.classList.remove('hovering');
+      });
+
+      document.addEventListener('mouseleave', () => dot.classList.remove('visible'));
+    })();
+  </script>
+
+</body>
+</html>
