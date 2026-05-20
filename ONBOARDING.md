@@ -131,7 +131,46 @@ Find the section and change the words between `>` and `</`. Example:
 
 Only change the text. Don't touch the tags around it.
 
-**One rule:** If you need an **&** symbol, type `&amp;` instead (e.g., `Black &amp; Grey`).
+---
+
+## HTML safety — read this once, save yourself headaches
+
+When you go beyond just changing text — adding a photo, swapping a link, etc. — these are the rules to remember:
+
+### Rule 1 — Quotes around values are mandatory
+
+Whenever you see `something="value"`, the quotes MUST stay around the value. Removing them breaks the line.
+
+| ✅ Correct | ❌ Broken |
+|---|---|
+| `<img src="photo.jpg" alt="A tattoo">` | `<img src=photo.jpg alt=A tattoo>` |
+| `<a href="https://instagram.com/shervin.510">` | `<a href=https://instagram.com/shervin.510>` |
+| `<div class="shop-item">` | `<div class=shop-item>` |
+
+If you're not sure, **just copy a working line from elsewhere in the file** and only change the specific parts you need.
+
+### Rule 2 — File names need to be exactly right
+
+The text inside `src="..."` must match the actual filename **exactly** — same letters, same dashes, same case, same extension.
+
+- Use lowercase letters and hyphens: `tiger-sketch.jpg`, not `Tiger Sketch.jpg`
+- Avoid spaces in filenames. If a filename does have a space, replace it with `%20` in the code (e.g., `src="Work/22%20my-photo.jpg"`)
+- Watch the file extension: `.jpg` ≠ `.JPG` ≠ `.jpeg`
+
+### Rule 3 — `&` in text needs to be `&amp;`
+
+If you want to display the **&** symbol in text, type `&amp;` instead. Example: `Black &amp; Grey`. (HTML uses `&` for special characters, so a bare `&` confuses the browser.)
+
+### Rule 4 — Don't delete the closing tag
+
+Every opening tag like `<p>` or `<div>` has a matching closing tag like `</p>` or `</div>`. Delete one without the other and the layout breaks.
+
+---
+
+### Stuck or unsure? Two safe escape hatches
+
+1. **Copy a working line and only edit what you need to.** This is the single best way to avoid syntax mistakes.
+2. **Ask an AI to write the line for you.** Paste the surrounding 2-3 lines into claude.ai or chatgpt.com and say "rewrite this so the image points to my-new-file.jpg." Then paste the answer back. It'll be correct.
 
 ---
 
