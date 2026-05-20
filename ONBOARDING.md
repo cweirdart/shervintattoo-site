@@ -31,7 +31,7 @@ Once those are set up, open Terminal (Mac) or PowerShell (Windows) and run:
 
 ```bash
 cd ~/Documents
-git clone https://github.com/<YOUR-GITHUB-USERNAME>/shervintattoo-site.git
+git clone https://github.com/cweirdart/shervintattoo-site.git
 cd shervintattoo-site
 claude
 ```
