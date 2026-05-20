@@ -10,10 +10,24 @@
 
 Your website is one file: `index.html`. It lives on GitHub. Every time you make a change and save it, Netlify automatically updates the live site within about 60 seconds.
 
-You'll use two tools (both free):
+You have **two ways** to make changes. Both are free. Pick whichever feels more comfortable.
 
-- **github.com** (in your browser) — for editing text, prices, gallery code, etc.
-- **GitHub Desktop** (app on your computer) — for adding, replacing, or deleting photos and videos
+### Option 1 — All in your browser with github.dev (simpler, recommended)
+
+Edit code AND add/remove photos in one place — your web browser. Nothing to install. Nothing local to sync. Zero risk of "is this version up to date?" confusion.
+
+**How to open it:**
+1. Go to **github.com/cweirdart/shervintattoo-site** in any browser
+2. Press the **period key (`.`)** on your keyboard
+3. The page transforms into a full code editor (VS Code in the browser)
+
+That's it. Skip ahead to the section "Editing in github.dev (browser-only workflow)" below.
+
+### Option 2 — GitHub.com web editor + GitHub Desktop (two tools)
+
+Use the **github.com website** to edit code, and the **GitHub Desktop app** to add/replace/delete photos and videos.
+
+This is the setup you're already on. It works, but you have to remember to **Fetch origin in GitHub Desktop before doing any local work** so your computer's copy stays in sync with the website. See "The one rule: Fetch before local changes" below.
 
 ---
 
@@ -23,16 +37,49 @@ You've already done this:
 
 1. ✅ GitHub account created
 2. ✅ Collaborator invite accepted
-3. ✅ GitHub Desktop installed
-4. ✅ Repository cloned to your computer
+3. ✅ GitHub Desktop installed (only needed for Option 2)
+4. ✅ Repository cloned to your computer (only needed for Option 2)
 
 Your site files are now in a folder on your computer. To find it: open GitHub Desktop → **Repository → Show in Finder** (Mac) or **Show in Explorer** (Windows).
+
+If you go with Option 1 (github.dev) you don't need GitHub Desktop or the local folder at all — but keep them around in case you want them later.
+
+---
+
+## Your first edit (do this once to learn the loop)
+
+Try a no-risk practice change so you can feel the whole workflow before doing anything important. Just change the copyright year in the footer.
+
+**In github.dev:**
+1. Open github.com/cweirdart/shervintattoo-site → press `.`
+2. In the left file tree, click `index.html`
+3. Press `Cmd+F` (Mac) or `Ctrl+F` (Win), search for `EDIT: FOOTER`
+4. Change the year to next year and back
+5. Click the **Source Control icon** on the left rail (looks like a branching tree) — third icon down
+6. Type a commit message like "test: footer year"
+7. Click **Commit & Push** (or the checkmark)
+8. Open shervintattoo.com — within 60 seconds, scroll to the footer to see your change
+
+That's the entire workflow. If that worked, you can edit anything. If something feels off, scroll to "If something breaks" below.
 
 ---
 
 ## Editing text, prices, or code
 
-Do this on github.com in your browser.
+Pick one of the two paths depending on what you set up:
+
+### Path A — In github.dev (browser-only, recommended)
+
+1. Go to **github.com/cweirdart/shervintattoo-site** → press **`.`**
+2. Click `index.html` in the left file tree
+3. Press **Cmd+F** (Mac) or **Ctrl+F** (Windows) and search for **EDIT:** to jump between editable sections
+4. Make your changes — github.dev auto-saves them as you type (you'll see a dot on the file tab when there are unsaved changes)
+5. Click the **Source Control icon** (3rd icon down on the left rail, looks like a branch)
+6. Type a short note (e.g., "updated flash sheet price")
+7. Click **Commit & Push** (or press `Cmd+Enter` / `Ctrl+Enter`)
+8. Wait ~60 seconds, refresh shervintattoo.com — your change is live
+
+### Path B — On github.com (classic web editor)
 
 1. Go to **github.com/cweirdart/shervintattoo-site**
 2. Click on **index.html**
@@ -44,7 +91,7 @@ Do this on github.com in your browser.
 8. Click **Commit changes** again to confirm
 9. Wait about 60 seconds, then refresh shervintattoo.com — your change is live
 
-That's it.
+Both paths end the same way: a commit on the `main` branch triggers an auto-deploy.
 
 ---
 
@@ -90,75 +137,109 @@ Only change the text. Don't touch the tags around it.
 
 ## Adding or removing photos and videos
 
-Do this in GitHub Desktop + your local folder.
+Adding a gallery photo means doing **two** things: (1) get the file into the `Work` folder, and (2) add the code line that displays it. Do both, commit, you're done.
 
-### Before you start: always sync first
+### Before you start: keep photos under 2 MB
 
-Open GitHub Desktop and click **Fetch origin** (top bar). If it says **Pull origin** after that, click it too. This makes sure your local files are up to date with any changes you made on the website.
+Photos larger than 2 MB can fail to load on older phones. If your photo is bigger, ask any AI chat (Claude, ChatGPT) to resize it, or use Preview on Mac (Tools → Adjust Size → set width to 1600px).
 
-### Adding a new photo to the gallery
+---
 
-**Step 1 — Add the file:**
+### Path A — All in github.dev (browser-only)
 
-1. Open your site folder on your computer (GitHub Desktop → Repository → Show in Finder/Explorer)
-2. Open the **Work** folder
-3. Drag your new photo in
-4. Name it with a number prefix, like `22 my-new-tattoo.jpg` — the number controls the order
+**Adding a new photo:**
 
-**Step 2 — Add the code line:**
-
-1. Go to **github.com/cweirdart/shervintattoo-site** → click **index.html** → pencil icon
-2. Search for `EDIT: GALLERY ITEMS`
-3. Copy one of the existing gallery lines and paste it where you want the new image
-4. Change the filename — **replace spaces with `%20`**:
+1. Open github.com/cweirdart/shervintattoo-site → press `.`
+2. In the left file tree, expand the **`Work`** folder
+3. **Drag your photo** from Finder/Explorer directly into the `Work` folder in the file tree
+4. Rename the file in the tree (right-click → Rename) to start with the next number, e.g., `22 my-new-tattoo.jpg`
+5. Open `index.html`, search for `EDIT: GALLERY ITEMS`
+6. Copy any existing gallery line, paste it where you want the new image, and edit the filename — **replace spaces with `%20`**:
 
 ```
 <div class="gallery-item" data-category="black-and-grey"><img src="Work/22%20my-new-tattoo.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
 ```
 
-5. Set the category:
-   - `"black-and-grey"` → Black and Grey tab
-   - `"color"` → Color tab
-   - `"flash"` → Flash tab
-   - `"color flash"` → both Color and Flash tabs
-   - Remove `data-category="..."` entirely → only shows under All
-6. Commit the change on GitHub
+7. Set the category (see "Categories" below)
+8. Click the Source Control icon → write a message ("add new tattoo photo") → Commit & Push
 
-**Step 3 — Push the photo:**
+Both the photo upload and the code change push together in one commit. Done.
 
-1. Open GitHub Desktop — it will show the new photo file in the Changes tab
-2. Type a summary (e.g., "added new tattoo photo")
-3. Click **Commit to main**
-4. Click **Push origin**
+**Removing a photo:**
+1. In the `Work` folder file tree, right-click the file → **Delete**
+2. In `index.html`, delete the entire matching `<div class="gallery-item">...</div>` line
+3. Commit & push
 
-Both the code change and the new photo are now live.
+**Replacing a photo (keep position, swap image):**
+1. Drag the new photo into the `Work` folder
+2. github.dev will ask if you want to **replace** the existing file — yes
+3. Commit & push. No code change needed.
+
+---
+
+### Path B — GitHub Desktop + github.com (two tools)
+
+**Always do this first:** open GitHub Desktop → click **Fetch origin** → if "Pull origin" appears, click it. This pulls down any code changes you made on the website so your local folder matches.
+
+**Adding a new photo:**
+
+*Step 1 — Add the file locally:*
+1. Open your site folder (GitHub Desktop → Repository → Show in Finder/Explorer)
+2. Open the **`Work`** folder
+3. Drag your photo in
+4. Rename it to start with the next number, e.g., `22 my-new-tattoo.jpg`
+
+*Step 2 — Add the code line on github.com:*
+1. Go to github.com/cweirdart/shervintattoo-site → click `index.html` → pencil icon
+2. Search for `EDIT: GALLERY ITEMS`
+3. Copy any existing gallery line, paste where you want it, change the filename — **replace spaces with `%20`**:
+
+```
+<div class="gallery-item" data-category="black-and-grey"><img src="Work/22%20my-new-tattoo.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+```
+
+4. Set the category (see "Categories" below). Commit the change.
+
+*Step 3 — Push the photo:*
+1. Open GitHub Desktop → it shows the new photo in Changes
+2. **Click Fetch origin first** (your code edit from Step 2 lives on the website; you need to pull it before pushing)
+3. Click **Pull origin** when it appears
+4. Type a summary ("added new tattoo photo") → **Commit to main** → **Push origin**
+
+**Removing a photo:**
+1. Delete the file from your `Work` folder
+2. On github.com, edit `index.html`, delete the entire matching `<div class="gallery-item">...</div>` line. Commit.
+3. In GitHub Desktop: Fetch → Pull → Commit the file deletion → Push.
+
+**Replacing a photo (keep position, swap image):**
+1. Drop the new file in your `Work` folder with the **same filename** as the old one (overwrite)
+2. In GitHub Desktop: commit and push. No code change needed.
+
+---
 
 ### Adding a video
 
-Same steps, but use this code line instead:
+Same steps as a photo, but the code line is slightly different:
 
 ```
 <div class="gallery-item" data-category="black-and-grey"><video src="Work/22%20my-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video></div>
 ```
 
-### Removing a photo or video
+Keep videos under 3 MB — bigger videos can stutter on phones.
 
-1. Delete the file from the `Work` folder on your computer
-2. On github.com, edit `index.html` and delete the entire line for that item (the whole `<div class="gallery-item">...</div>`)
-3. Commit on github.com
-4. In GitHub Desktop: commit the file deletion, then push
+### Categories
 
-### Replacing a photo
+Set the right `data-category` on each item:
 
-If you want to swap a photo but keep it in the same gallery position:
-
-1. Put the new file in the `Work` folder with the **same filename** as the old one (overwrite it)
-2. In GitHub Desktop: commit and push
-3. No code changes needed — the HTML already points to that filename
+- `"black-and-grey"` → Black and Grey tab
+- `"color"` → Color tab
+- `"flash"` → Flash tab
+- `"color flash"` → both Color and Flash tabs (separated by a space)
+- Remove `data-category="..."` entirely → only shows under "All"
 
 ### Reordering
 
-Move the gallery-item lines up or down in the code on github.com. Items display in the order they appear. The carousel automatically handles page breaks.
+Move the gallery-item lines up or down in `index.html`. Items display in the order they appear. The carousel automatically handles page breaks.
 
 ---
 
@@ -213,39 +294,66 @@ The filter value on the button must exactly match the category value on the item
 
 ---
 
-## The one rule: Fetch before local changes
+## The one rule (only if you're using GitHub Desktop): Fetch before local changes
 
-If you edited code on github.com and then want to add photos locally, **always open GitHub Desktop and click Fetch origin first**. This syncs your local folder with what's on the website. If you skip this, you might get a conflict error. If that happens, it's fixable — but easier to just Fetch first every time.
+This rule only applies to **Path B (Desktop + web editor)**. If you do everything in github.dev (Path A), skip this section — there's no local folder, so nothing to sync.
+
+If you're on Path B and you edited code on github.com and then want to add photos locally, **always open GitHub Desktop and click Fetch origin first**. This syncs your local folder with what's on the website. If you skip this, you might get a conflict error. If that happens, it's fixable — but easier to just Fetch first every time.
+
+**The simplest way to never hit this issue:** switch to Path A (github.dev). One tool, one place, no sync.
 
 ---
 
 ## If something breaks
 
-**Option 1 — Undo on github.com:**
+Nothing is ever permanently lost. Every version is in git history. Here's how to roll back to the last working version:
+
+**Easiest — Undo on github.com:**
 
 1. Go to github.com/cweirdart/shervintattoo-site
-2. Click **Commits** (near the top)
-3. Find the commit that broke things
-4. Click it → click **Revert** (or ask c.weird for help)
+2. Click **Commits** (near the top of the file list)
+3. Find the commit you want to undo (usually the most recent one)
+4. Click the commit message → look for the **... (3-dot menu)** → click **Revert**
+5. This opens a Pull Request — click **Create pull request** → then **Merge pull request**
+6. Site rebuilds within 60 seconds with the bad change undone
 
-**Option 2 — Undo in GitHub Desktop:**
+**In GitHub Desktop (Path B only):**
 
-1. Go to the **History** tab
+1. Go to the **History** tab (left sidebar)
 2. Right-click the bad commit
 3. Click **Revert Changes in Commit**
 4. Push
 
-Nothing is ever permanently lost. Git keeps every version.
+**When in doubt, text c.weird** at info@cweird.com — better to ask than to keep poking at it.
 
 ---
 
 ## Optional: Using AI for help
 
-You don't need any AI tool to edit this site. But if you're stuck on how to write a specific line of HTML, you can paste the line into any free AI chat (Claude, ChatGPT, whatever) and ask. For example:
+You don't need any AI tool to edit this site. But if you're stuck on how to write a specific line of HTML, AI can write or rewrite it for you.
 
-> "I have this gallery line. How do I change it to point to a file called 23 dragon-sleeve.jpg in the color category?"
+### For one-off help (free, no setup)
 
-For bigger edits, [ChatGPT Codex](https://chatgpt.com/codex) (free) can connect to your GitHub repo and make code changes directly. [Claude Code](https://claude.com/claude-code) and [Cursor](https://cursor.com) are other options but require paid plans or local setup.
+Open **claude.ai** or **chatgpt.com** in another tab. Paste the line you want to change and describe what you want:
+
+> "I have this gallery line. How do I change it so it points to a file called `23 dragon-sleeve.jpg` and shows under the Color filter?"
+>
+> ```html
+> <div class="gallery-item" data-category="black-and-grey"><img src="Work/22%20old-tattoo.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+> ```
+
+Copy the answer back into github.dev or github.com, save, commit.
+
+### For bigger edits (also free, deeper integration)
+
+These tools can read the whole repo and make multi-line changes:
+
+- **[ChatGPT Codex](https://chatgpt.com/codex)** — free, connects to your GitHub repo and can edit + commit for you. Probably the easiest paid-equivalent that's free.
+- **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** — free with a Google account, generous quota, runs in your Terminal.
+- **[Claude Code](https://claude.com/claude-code)** — most polished but requires a Claude Pro subscription ($20/mo) or pay-per-use API credit (~15-30¢ per session).
+- **[Cursor](https://cursor.com)** — a code editor with AI built in. Has a free tier.
+
+For the rare-edit volume you'll have, the free options are plenty.
 
 ---
 
