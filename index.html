@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- EDIT: SEO — page title, description, and keywords (what Google shows in search results) -->
   <title>Tattooing by Shervin — Tattoo Artist in San Francisco, CA</title>
   <meta name="description" content="Tattooing by Shervin — custom tattoo artist in San Francisco, California. Specializing in color, traditional, Japanese, and illustrative tattoo styles. Persian-inspired artwork. Book your appointment today.">
   <meta name="keywords" content="tattoo, tattoo artist, San Francisco tattoo, California tattooing, Persian tattoo, custom tattoo, color tattoo, Japanese tattoo, traditional tattoo, illustrative tattoo, Shervin, SF tattoo, Bay Area tattoo">
@@ -54,6 +55,9 @@
        Persian calligraphy logo + ornamental flowers.
        ============================================ */
 
+    /* EDIT: COLORS — change hex values to restyle the whole site.
+       "paper" = backgrounds, "ink" = text, "accent/gold" = highlights,
+       "green" = success, "red" = actually blue (booking CTA) */
     :root {
       --color-paper: #161412;
       --color-paper-dark: #0e0c0a;
@@ -78,6 +82,7 @@
       --color-dowel-light: #5c4a34;
       --color-dowel-dark: #1e1610;
 
+      /* EDIT: FONTS — change font families here */
       --font-display: 'Cormorant Garamond', 'Georgia', serif;
       --font-body: 'DM Sans', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -492,8 +497,11 @@
     }
 
     .hero-logo {
-      max-width: min(95vw, 1300px);
+      width: auto;
+      max-width: min(92vw, 1200px);
+      max-height: 48vh; /* never exceed ~half the viewport so logo + text below fit */
       height: auto;
+      object-fit: contain;
       filter: drop-shadow(0 0 18px rgba(212, 184, 106, 0.95)) drop-shadow(0 0 40px rgba(212, 184, 106, 0.7)) drop-shadow(0 0 80px rgba(232, 204, 126, 0.5)) drop-shadow(0 0 130px rgba(232, 204, 126, 0.3));
     }
 
@@ -1390,7 +1398,8 @@
     }
   </style>
 
-  <!-- Structured Data (JSON-LD) -->
+  <!-- EDIT: STRUCTURED DATA — this is what Google reads for rich search results.
+       Update name, email, address, social links, and specialties if they change. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1452,39 +1461,43 @@
   <div class="scroll-body">
 
   <!-- ======== HERO ======== -->
+  <!-- EDIT: HERO — change the background video file, logo image, tagline, location, and CTA text -->
   <section id="hero">
     <video autoplay muted loop playsinline webkit-playsinline preload="auto">
-      <source src="hero-video.mp4" type="video/mp4">
+      <source src="hero-video.mp4" type="video/mp4"> <!-- EDIT: hero background video filename -->
     </video>
     <div class="hero-content fade-in">
-      <h1><img src="TattooingByServin_logo+flowers.png" alt="Tattooing by Shervin" class="hero-logo" width="1040" height="390"></h1>
-      <p class="hero-tagline">Gifts from West Asia and the West Coast.</p>
-      <p class="hero-location">San Francisco, California</p>
+      <h1><img src="TattooingByServin_logo+flowers.png" alt="Tattooing by Shervin" class="hero-logo" width="1040" height="390"></h1> <!-- EDIT: logo image -->
+      <p class="hero-tagline">Gifts from West Asia and the West Coast.</p> <!-- EDIT: tagline -->
+      <p class="hero-location">San Francisco, California</p> <!-- EDIT: location -->
       <div class="hero-cta-group">
-        <a href="#booking" class="hero-cta">Book a Tattoo</a>
-        <p class="hero-cta-subtitle">Talismans and Amulets for Protection and Peace</p>
-        <p class="hero-farsi" lang="fa" dir="rtl">یکی بود یکی نبود، فقط شما &#x26B1;</p>
+        <a href="#booking" class="hero-cta">Book a Tattoo</a> <!-- EDIT: CTA button text -->
+        <p class="hero-cta-subtitle">Talismans and Amulets for Protection and Peace</p> <!-- EDIT: subtitle -->
+        <p class="hero-farsi" lang="fa" dir="rtl">یکی بود یکی نبود، فقط شما &#x26B1;</p> <!-- EDIT: Farsi text -->
       </div>
     </div>
   </section>
 
   <!-- ======== ABOUT ======== -->
+  <!-- EDIT: ABOUT — portrait photo, bio text, studio name/address, specialties list -->
   <section id="about">
     <div class="container">
       <div class="about-grid">
         <div class="about-portrait fade-in">
-          <img src="Shervin_Polaroid_bycweird.jpeg" alt="Shervin — tattoo artist portrait, San Francisco">
+          <img src="Shervin_Polaroid_bycweird.jpeg" alt="Shervin — tattoo artist portrait, San Francisco"> <!-- EDIT: portrait photo filename -->
         </div>
         <div class="about-text fade-in">
           <p class="label">About</p>
-          <h2>Shervin</h2>
+          <h2>Shervin</h2> <!-- EDIT: name -->
+          <!-- EDIT: bio paragraphs — change/add/remove <p> tags as needed -->
           <p>Based out of San Francisco, Shervin is a Bay Area native Iranian American tattooer and artist. Rooted in heavy traditional forms from all cultures, each piece is catered and shaped to fit and empower people through every step.</p>
           <p>Bookings open below and walk ins are always open based on availability.</p>
 
           <div class="about-details">
             <div class="about-detail">
               <p class="label">Based In</p>
-              <span>San Francisco, California</span>
+              <span>San Francisco, California</span> <!-- EDIT: city -->
+              <!-- EDIT: studio name, address, and Google Maps link -->
               <a href="https://www.google.com/maps/search/?api=1&amp;query=Analog+Tattoo+Art+Kolectiv+1038+Larkin+St+San+Francisco+CA+94109" target="_blank" rel="noopener" class="about-studio-link">
                 <span class="about-studio-name">Analog Tattoo Art Kolectiv</span>
                 <span class="about-studio-address">1038 Larkin St, SF, CA 94109</span>
@@ -1492,6 +1505,7 @@
             </div>
             <div class="about-detail">
               <p class="label">Specialties</p>
+              <!-- EDIT: specialties list — use &amp; for the & symbol -->
               <span>Color, Black &amp; Grey, Traditional, Japanese, West Asian, Persian, Illustrative, Tribal, Ornamental, Custom, Freehand</span>
             </div>
             <div class="about-detail">
@@ -1504,12 +1518,27 @@
   </section>
 
   <!-- ======== WORK ======== -->
+  <!-- EDIT: GALLERY — filter buttons, and gallery items below.
+       To ADD a new image:  1) Put the file in the Work/ folder
+                            2) Copy one of the gallery-item lines below
+                            3) Change the src to your new filename (spaces become %20)
+                            4) Set data-category to one or more of: black-and-grey, color, flash
+                               (space-separated for multiple, e.g. "color flash")
+                            5) Leave data-category off entirely for items that show in "All" only
+       To REMOVE an image:  Delete the entire <div class="gallery-item">...</div> line
+       To REORDER:          Move the gallery-item lines up or down — the carousel
+                            auto-paginates them 6 per page.
+       To ADD a video:      Same as image but use <video> instead of <img>:
+                            <div class="gallery-item" data-category="blackwork"><video src="Work/yourfile.mp4" muted loop playsinline webkit-playsinline preload="auto"></video></div>
+  -->
   <section id="work">
     <div class="container">
       <div class="work-header">
         <h2 class="fade-in">Work</h2>
       </div>
 
+      <!-- EDIT: FILTER BUTTONS — add/remove/rename filter categories here.
+           The data-filter value must match the data-category values on gallery items. -->
       <div class="gallery-filter fade-in">
         <button class="active" data-filter="all">All</button>
         <button data-filter="black-and-grey">Black and Grey</button>
@@ -1521,8 +1550,8 @@
         <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous">&#8249;</button>
         <button class="carousel-arrow next" id="carousel-next" aria-label="Next">&#8250;</button>
         <div class="carousel-track" id="carousel-track">
-          <!-- Carousel JS auto-paginates these items in slot order.
-               Flash book stays first, then numbered slots 1-22. -->
+          <!-- EDIT: GALLERY ITEMS — each line below is one portfolio piece.
+               The carousel auto-paginates them 6 per page. -->
           <div class="carousel-page">
             <div class="gallery-item gallery-item--captioned" data-category="flash">
               <video src="hero-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
@@ -1557,11 +1586,13 @@
   </section>
 
   <!-- ======== BOOKING ======== -->
+  <!-- EDIT: BOOKING — intro text, form fields, day preferences, style options -->
   <section id="booking">
     <div class="container">
       <div class="booking-header fade-in">
         <h2>Booking</h2>
-        <p class="booking-subhead">Get Tattooed</p>
+        <p class="booking-subhead">Get Tattooed</p> <!-- EDIT: subheading -->
+        <!-- EDIT: booking intro text -->
         <p>Thank you for your interest in booking. I'm grateful and excited to hear of your ideas for your next tattoo. Please fill out the form the best of your ability and if approved we can move on to the next steps. Feel free to mention anything not listed and please be patient with all responses as I am a one man operation. Always with love and respect &#x1F64F;&#x1F3FD;&#x1F4FF;&#x1F33F;</p>
       </div>
 
@@ -1733,6 +1764,14 @@
   </section>
 
   <!-- ======== SHOP ======== -->
+  <!-- EDIT: SHOP — product names, prices, and sold-out status.
+       To mark an item as AVAILABLE: change "Sold Out" button text, remove
+       the "sold-out" class and "disabled" attribute from the button.
+       To mark as SOLD OUT: add class="btn-buy sold-out" disabled to the button.
+       To ADD a product image: replace <div class="shop-item-image">Sold out</div>
+       with <div class="shop-item-image"><img src="your-image.jpg" alt="Product name"></div>
+       To ADD a new product: copy an entire <div class="shop-item">...</div> block.
+       To REMOVE a product: delete the entire <div class="shop-item">...</div> block. -->
   <section id="shop">
     <div class="container">
       <div class="shop-header">
@@ -1788,6 +1827,7 @@
   </div>
 
   <!-- ======== CONTACT / BUSINESS CARD ======== -->
+  <!-- EDIT: CONTACT — email address, Instagram handle, business card images, side illustrations -->
   <section class="card-section" id="contact">
     <div class="container">
       <div class="contact-header fade-in">
@@ -1795,7 +1835,7 @@
       </div>
     </div>
     <div class="contact-layout">
-      <a href="mailto:shervinx510@gmail.com" class="contact-side fade-in" aria-label="Email Shervin">
+      <a href="mailto:shervinx510@gmail.com" class="contact-side fade-in" aria-label="Email Shervin"> <!-- EDIT: email address -->
         <img src="shervin-pomegranate.png" alt="Pomegranate illustration" class="contact-side-img">
         <span class="contact-side-label">Email</span>
       </a>
@@ -1811,7 +1851,7 @@
           </div>
         </div>
       </div>
-      <a href="https://instagram.com/shervin.510" target="_blank" rel="noopener" class="contact-side fade-in" aria-label="Instagram @shervin.510">
+      <a href="https://instagram.com/shervin.510" target="_blank" rel="noopener" class="contact-side fade-in" aria-label="Instagram @shervin.510"> <!-- EDIT: Instagram URL -->
         <img src="shervin-skull.png" alt="Skull illustration" class="contact-side-img">
         <span class="contact-side-label">Instagram</span>
       </a>
@@ -1836,10 +1876,11 @@
   </div><!-- /.scroll-body -->
 
   <!-- ======== FOOTER / PARCHMENT BAR ======== -->
+  <!-- EDIT: FOOTER — copyright year and name -->
   <footer>
     <div class="footer-bar">
       <div class="footer-inner">
-        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site + Headshot by <a href="https://cweird.com" rel="noopener">c.weird:</a></p>
+        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site + Headshot by <a href="https://cweird.com" rel="noopener">c.weird:</a></p> <!-- EDIT: copyright year -->
       </div>
     </div>
   </footer>
