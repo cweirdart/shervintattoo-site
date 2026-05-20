@@ -820,6 +820,33 @@
       color: var(--color-ink);
     }
 
+    .about-studio-link {
+      display: inline-flex;
+      flex-direction: column;
+      margin-top: 0.65rem;
+      text-decoration: none;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .about-studio-link .about-studio-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+    .about-studio-link .about-studio-address {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--color-ink-light);
+      margin-top: 0.1rem;
+    }
+    .about-studio-link:hover .about-studio-name {
+      color: var(--color-accent-hover);
+      text-shadow: 0 0 8px rgba(184, 154, 82, 0.5);
+    }
+    .about-studio-link:hover .about-studio-address {
+      color: var(--color-ink);
+    }
+
     .about-contact-btn {
       display: inline-block;
       margin-top: 0.25rem;
@@ -1454,10 +1481,17 @@
           <p class="label">About</p>
           <h2>Shervin</h2>
           <p>Based out of San Francisco, Shervin is a Bay Area native Iranian American tattooer and artist. Rooted in heavy traditional forms from all cultures, each piece is catered and shaped to fit and empower people through every step.</p>
-          <p>Currently taking all appointments out of <a href="https://www.google.com/maps/search/?api=1&amp;query=Analog+Tattoo+Art+Kolectiv+1038+Larkin+St+San+Francisco+CA+94109" target="_blank" rel="noopener" class="about-studio-link"><strong>Analog Tattoo Art Kolectiv</strong> — 1038 Larkin St, San Francisco, CA 94109</a>, Thurs–Sun.</p>
           <p>Bookings open below and walk ins are always open based on availability.</p>
 
           <div class="about-details">
+            <div class="about-detail">
+              <p class="label">Based In</p>
+              <span>San Francisco, California</span>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Analog+Tattoo+Art+Kolectiv+1038+Larkin+St+San+Francisco+CA+94109" target="_blank" rel="noopener" class="about-studio-link">
+                <span class="about-studio-name">Analog Tattoo Art Kolectiv</span>
+                <span class="about-studio-address">1038 Larkin St, SF, CA 94109</span>
+              </a>
+            </div>
             <div class="about-detail">
               <p class="label">Specialties</p>
               <span>Color, Black &amp; Grey, Traditional, Japanese, West Asian, Persian, Illustrative, Tribal, Ornamental, Custom, Freehand</span>
