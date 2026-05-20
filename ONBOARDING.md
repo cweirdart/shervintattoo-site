@@ -181,7 +181,7 @@ Total: $0 to $20/month depending on how you pay for Claude.
 
 ## Domain renewal
 
-`shervintattoo.com` is registered with **<REGISTRAR — CHRISTOPHER FILL IN>**. It auto-renews annually. If renewal fails, the site will go offline. Make sure the credit card on file is current.
+`shervintattoo.com` is registered in your name with **Namecheap**. It auto-renews annually. If renewal fails, the site goes offline — make sure the credit card on your Namecheap account stays current. Log in at https://ap.www.namecheap.com to check.
 
 ---
 
