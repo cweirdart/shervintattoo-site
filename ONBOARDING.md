@@ -22,10 +22,9 @@ You never type a single line of code or git command yourself. **Claude Code does
 
 You'll need:
 
-1. **GitHub account** — sign up at https://github.com if you don't have one. Free.
-2. **Access to this repo** — Christopher will add you as a collaborator. Accept the invite.
-3. **Claude Code** — install from https://claude.com/claude-code. Sign in with your Anthropic account (Claude Pro/Max covers it, or you can pay per-use with an API key).
-4. **Git** — already installed on Mac. On Windows, install from https://git-scm.com.
+1. **GitHub** — you already have an account and a collaborator invite from Christopher. Accept the invite if you haven't yet (check your GitHub notifications or your email).
+2. **Claude Code** — install from https://claude.com/claude-code. Sign in with your Anthropic account (Claude Pro/Max covers it, or you can pay per-use with an API key).
+3. **Git** — already installed on Mac. On Windows, install from https://git-scm.com.
 
 Once those are set up, open Terminal (Mac) or PowerShell (Windows) and run:
 
