@@ -269,15 +269,27 @@ To:
 <button class="btn-buy sold-out" disabled>Sold Out</button>
 ```
 
-**Add a product photo:** Replace:
-```
-<div class="shop-item-image">Sold out</div>
-```
-With:
-```
-<div class="shop-item-image"><img src="your-photo.jpg" alt="Product name"></div>
-```
-Then add the photo file through GitHub Desktop (same as gallery photos, but put it in the main folder, not `Work`).
+**Add a product photo:**
+
+1. **Name the file carefully:** use lowercase letters and hyphens, no spaces. E.g., `tiger-sketch.jpg`, NOT `Tiger Sketch.jpg`.
+2. **Keep it under ~500 KB.** If your photo is bigger, ask any AI chat to resize it to 1600px wide (or use Mac Preview → Tools → Adjust Size).
+3. **Add the file:** drag it into the **root folder** (NOT the `Work` folder — that's for the gallery only).
+4. **In `index.html`, replace this line:**
+   ```
+   <div class="shop-item-image">Sold out</div>
+   ```
+   **with this** (keep the quotes around the filename, change just the two highlighted parts):
+   ```
+   <div class="shop-item-image"><img src="tiger-sketch.jpg" alt="Limited Edition Flash Sheet — tiger sketch"></div>
+   ```
+   - **`src="..."`** — your filename, in quotes. The quotes matter.
+   - **`alt="..."`** — describe what's in the photo for accessibility and SEO.
+5. Commit & push.
+
+**Common mistakes to avoid:**
+- ❌ `<img src=tiger sketch.jpg>` — missing quotes, and the space breaks everything
+- ❌ `<img src="Tiger Sketch.jpg">` — spaces in filenames need `%20` (just rename the file with hyphens instead)
+- ✅ `<img src="tiger-sketch.jpg" alt="...">` — clean and safe
 
 ---
 
