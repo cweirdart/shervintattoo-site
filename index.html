@@ -536,6 +536,24 @@
       gap: var(--space-sm);
     }
 
+    .hero-cta-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+      letter-spacing: 0.01em;
+      color: #fff;
+      margin: 0;
+      text-align: center;
+      line-height: 1.35;
+      align-self: center;
+      max-width: min(90vw, 460px);
+      text-shadow:
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 14px rgba(212, 184, 106, 0.6),
+        0 0 28px rgba(212, 184, 106, 0.3);
+    }
+
     .hero-farsi {
       font-family: var(--font-farsi);
       font-weight: 700;
@@ -1419,6 +1437,7 @@
       <p class="hero-location">San Francisco, California</p>
       <div class="hero-cta-group">
         <a href="#booking" class="hero-cta">Book a Tattoo</a>
+        <p class="hero-cta-subtitle">Talismans and Amulets for Protection, Peace, and Power</p>
         <p class="hero-farsi" lang="fa" dir="rtl">یکی بود یکی نبود، فقط شما &#x26B1;</p>
       </div>
     </div>
