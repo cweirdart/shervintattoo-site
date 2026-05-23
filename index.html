@@ -1267,6 +1267,23 @@
       object-fit: contain;
     }
 
+    /* Image+© wrapper — sizes to the image so © sits at the image edge,
+       not the screen edge. Survives screenshot crops better. */
+    .lightbox-media {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    .lightbox-media > img,
+    .lightbox-media > video {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
     /* Overlay caption sits on top of the lightbox image/video, anti-screenshot */
     .lightbox-caption {
       display: none;
@@ -1317,18 +1334,24 @@
     }
     .lightbox-close:hover { opacity: 1; }
 
-    /* Copyright tag in the lightbox — visible whenever an image is enlarged */
+    /* Copyright tag — sits ON the bottom edge of the image so it's
+       inside any reasonable screenshot crop, not just below the image */
     .lightbox-copyright {
       position: absolute;
       left: 50%;
-      bottom: 1.25rem;
+      bottom: 0.75rem;
       transform: translateX(-50%);
       font-family: var(--font-mono);
       font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.55);
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      color: rgba(255, 255, 255, 0.95);
+      background: rgba(0, 0, 0, 0.45);
+      padding: 0.4rem 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
       pointer-events: none;
       z-index: 210;
       white-space: nowrap;
@@ -1336,7 +1359,8 @@
     @media (max-width: 768px) {
       .lightbox-copyright {
         font-size: 0.55rem;
-        bottom: 0.75rem;
+        bottom: 0.5rem;
+        padding: 0.3rem 0.65rem;
       }
     }
 
@@ -1861,9 +1885,11 @@
     <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
     <button class="lightbox-arrow prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
     <button class="lightbox-arrow next" id="lightbox-next" aria-label="Next">&#8250;</button>
-    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-media" id="lightbox-media">
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-copyright">&copy; Shervin Tattoo &middot; All rights reserved</div>
+    </div>
     <div class="lightbox-caption" id="lightbox-caption"></div>
-    <div class="lightbox-copyright">&copy; Shervin Tattoo &middot; All rights reserved</div>
   </div>
 
   <!-- ======== CONTACT / BUSINESS CARD ======== -->
@@ -2128,10 +2154,11 @@
       lightboxIndex = (idx + lightboxItems.length) % lightboxItems.length;
       const item = lightboxItems[lightboxIndex];
       const lb = document.getElementById('lightbox');
+      const lbMedia = document.getElementById('lightbox-media');
       const lbImg = document.getElementById('lightbox-img');
       const itemImg = item.querySelector('img');
       const itemVid = item.querySelector('video');
-      let lbVid = lb.querySelector('video');
+      let lbVid = lbMedia.querySelector('video');
 
       if (itemImg) {
         lbImg.src = itemImg.src;
@@ -2147,7 +2174,8 @@
           lbVid.setAttribute('autoplay', '');
           lbVid.setAttribute('muted', '');
           lbVid.setAttribute('playsinline', '');
-          lb.appendChild(lbVid);
+          // Insert before the copyright element so © stays on top
+          lbMedia.insertBefore(lbVid, lbMedia.querySelector('.lightbox-copyright'));
         }
         lbVid.src = itemVid.src;
         lbVid.style.display = 'block';
