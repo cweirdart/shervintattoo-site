@@ -147,6 +147,19 @@
     }
 
     img { max-width: 100%; display: block; }
+
+    /* Casual image-save deterrent at the CSS layer — prevents
+       drag-and-drop save and accidental selection. JS handlers
+       in the script block extend this to right-click + Cmd+S. */
+    img, video {
+      -webkit-user-drag: none;
+      user-drag: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
     a { color: var(--color-accent); text-decoration: none; transition: color 0.2s, text-shadow 0.2s; }
     a:hover { color: var(--color-accent-hover); text-shadow: 0 0 8px rgba(184, 154, 82, 0.6); }
 
@@ -2199,6 +2212,33 @@
       if (!lb || !lb.classList.contains('open')) return;
       if (e.key === 'ArrowLeft') lightboxPrev();
       else if (e.key === 'ArrowRight') lightboxNext();
+    });
+
+    // ---- Casual image-save deterrent ----
+    // NOTE: This is friction, not security. Anyone with browser dev tools
+    // or even just "View Source" can still grab the assets. It stops the
+    // 80% of people who right-click → Save Image, drag the photo to their
+    // desktop, or hit Cmd+S to save the page. That's the entire goal.
+
+    // 1. Block the context menu (right-click) — except in form inputs
+    //    so the booking form still works normally (paste, etc.)
+    document.addEventListener('contextmenu', e => {
+      if (e.target.matches('input, textarea, select, [contenteditable]')) return;
+      e.preventDefault();
+    });
+
+    // 2. Block dragging images and videos out of the browser
+    document.addEventListener('dragstart', e => {
+      if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+        e.preventDefault();
+      }
+    });
+
+    // 3. Block Cmd+S / Ctrl+S (save page) — but leave Cmd+P (print) alone
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+      }
     });
 
     // ---- Business Card ----
