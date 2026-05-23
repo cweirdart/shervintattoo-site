@@ -40,6 +40,9 @@
   <meta name="geo.region" content="US-CA">
   <meta name="geo.placename" content="San Francisco">
 
+  <!-- Pinterest opt-out — Pinterest's official Save button respects this -->
+  <meta name="pinterest" content="nopin" description="All artwork © Shervin Tattoo. DM @shervin.510 for licensing.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Parastoo:wght@400;700&display=swap" rel="stylesheet">
 
@@ -1314,6 +1317,29 @@
     }
     .lightbox-close:hover { opacity: 1; }
 
+    /* Copyright tag in the lightbox — visible whenever an image is enlarged */
+    .lightbox-copyright {
+      position: absolute;
+      left: 50%;
+      bottom: 1.25rem;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 210;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .lightbox-copyright {
+        font-size: 0.55rem;
+        bottom: 0.75rem;
+      }
+    }
+
     /* Lightbox prev/next arrows */
     .lightbox-arrow {
       position: absolute;
@@ -1837,6 +1863,7 @@
     <button class="lightbox-arrow next" id="lightbox-next" aria-label="Next">&#8250;</button>
     <img id="lightbox-img" src="" alt="">
     <div class="lightbox-caption" id="lightbox-caption"></div>
+    <div class="lightbox-copyright">&copy; Shervin Tattoo &middot; All rights reserved</div>
   </div>
 
   <!-- ======== CONTACT / BUSINESS CARD ======== -->
