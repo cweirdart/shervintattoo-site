@@ -347,7 +347,7 @@ Customer clicks Buy → a modal pops up with an order form (name, email, address
         data-product="Stoneware Vessel Vol. 1"
         data-price="120"
         data-payment-method="venmo"
-        data-venmo-handle="@shervin-510">Buy Now</button>
+        data-venmo-handle="@shervin510">Buy Now</button>
 ```
 
 Set `data-product`, `data-price`, and `data-venmo-handle` for each item. The customer's order details email you automatically via Netlify Forms.
@@ -412,7 +412,7 @@ You only do this once, ever:
 
 If you don't already have one, create a Venmo account at https://venmo.com. For low volume (under ~$500/month), a **personal** Venmo account is fine and has no fees. Once volume grows, switch to a **business** account (1.9% + $0.10 per transaction).
 
-Set your Venmo handle to something professional — e.g., `@shervin-tattoo` rather than your personal handle.
+Shervin's current Venmo handle: **`@shervin510`** — this is what gets pasted into the `data-venmo-handle` attribute on each buy button.
 
 ### Per-order Venmo flow (what happens on Shervin's side)
 
