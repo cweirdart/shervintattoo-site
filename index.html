@@ -1203,6 +1203,134 @@
       text-decoration: line-through;
     }
 
+    /* ---- Checkout Modal — order form then payment instructions ---- */
+    .checkout-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(10, 9, 8, 0.92);
+      align-items: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+      padding: var(--space-md) 0;
+    }
+    .checkout-modal.open { display: flex; }
+
+    .checkout-modal-card {
+      position: relative;
+      background: var(--color-paper);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      width: min(92vw, 540px);
+      margin: auto;
+      padding: var(--space-md);
+    }
+
+    .checkout-modal-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: transparent;
+      border: none;
+      color: var(--color-ink-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.4rem 0.6rem;
+      line-height: 1;
+    }
+    .checkout-modal-close:hover { color: var(--color-accent); }
+
+    .checkout-step h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkout-product-summary {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .checkout-step #checkout-form { max-width: none; }
+
+    .checkout-payment-content {
+      text-align: center;
+      padding: var(--space-md) 0;
+    }
+    .checkout-payment-amount {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--color-accent);
+      margin-bottom: var(--space-sm);
+    }
+    .checkout-payment-handle {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--color-ink);
+      padding: 0.5rem 0.8rem;
+      background: var(--color-paper-dark);
+      display: inline-block;
+      margin: 0.5rem 0 var(--space-sm);
+      border: 1px solid var(--color-border);
+    }
+    .checkout-payment-memo {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--color-accent);
+      padding: 0.4rem 0.7rem;
+      background: var(--color-paper-dark);
+      display: inline-block;
+      margin: 0.4rem 0 var(--space-sm);
+      border: 1px dashed var(--color-accent);
+      letter-spacing: 0.05em;
+    }
+    .checkout-payment-content p {
+      color: var(--color-ink-light);
+      font-size: 0.92rem;
+      margin: 0.3rem 0;
+    }
+    .checkout-payment-btn {
+      display: inline-block;
+      margin-top: var(--space-sm);
+      padding: 0.75rem 1.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--color-accent);
+      color: var(--color-paper-dark);
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .checkout-payment-btn:hover {
+      background: var(--color-accent-hover);
+      color: var(--color-paper-dark);
+    }
+    .checkout-payment-footer {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--color-ink-faded);
+      text-align: center;
+      margin-top: var(--space-md);
+      line-height: 1.6;
+    }
+    .checkout-modal-done {
+      margin-top: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .checkout-modal-card {
+        padding: var(--space-md) var(--space-sm);
+      }
+      .checkout-payment-amount { font-size: 2rem; }
+    }
+
     /* ---- Footer / Parchment Bar ---- */
     footer {
       position: relative;
@@ -1831,16 +1959,34 @@
   <!-- ======== SHOP ======== -->
   <!-- EDIT: SHOP — manage products and payment links.
 
-       TO MAKE AN ITEM AVAILABLE FOR PURCHASE:
-       1. Create a Stripe Payment Link at dashboard.stripe.com/payment-links
-          (set name, price, product photo, shipping address collection)
-       2. Copy the URL (looks like https://buy.stripe.com/xxxxxxx)
-       3. Replace the <button> with:
-            <a href="PASTE_STRIPE_URL_HERE" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
+       Each item supports THREE buy-button modes. Pick one per item:
 
-       TO MARK AS SOLD OUT (item stays visible, just unavailable):
-       Replace the <a> with:
-            <button class="btn-buy sold-out" disabled>Sold Out</button>
+       ── MODE A: Sold Out (current state for all 4 items) ──
+       <button class="btn-buy sold-out" disabled>Sold Out</button>
+
+       ── MODE B: Order-form modal → Venmo ──
+       (Customer fills form on the site, gets Venmo handle + memo,
+        sends payment manually. Shervin verifies and ships.)
+       <button class="btn-buy"
+               data-checkout="open"
+               data-product="Stoneware Vessel Vol. 1"
+               data-price="120"
+               data-payment-method="venmo"
+               data-venmo-handle="@shervin510">Buy Now</button>
+
+       ── MODE C: Order-form modal → Stripe Payment Link ──
+       (Customer fills form on the site, then redirected to Stripe.)
+       <button class="btn-buy"
+               data-checkout="open"
+               data-product="DIASPORA Shirt"
+               data-price="40"
+               data-payment-method="stripe"
+               data-stripe-link="https://buy.stripe.com/abcXYZ">Buy Now</button>
+
+       ── MODE D: Direct Stripe link (no form) ──
+       (Customer goes straight to Stripe checkout. No site-side order
+        capture, but Stripe collects email + address.)
+       <a href="https://buy.stripe.com/abcXYZ" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
 
        TO ADD A PRODUCT IMAGE:
        Replace <div class="shop-item-image">Sold out</div>
@@ -1850,7 +1996,11 @@
        TO ADD A NEW PRODUCT: copy an entire <div class="shop-item">...</div> block.
        TO REMOVE A PRODUCT: delete the entire <div class="shop-item">...</div> block.
 
-       Order notifications: Stripe emails Shervin automatically when someone buys. -->
+       Order notifications:
+       - Modes B + C: Shervin gets an email from Netlify Forms with name + email +
+         shipping address + product + order ID. Reply to confirm and ship.
+       - Mode D: Stripe emails Shervin directly when the buyer pays.
+       - All modes: customer always gets a receipt/confirmation email automatically. -->
   <section id="shop">
     <div class="container">
       <div class="shop-header">
@@ -1957,6 +2107,87 @@
 
   </div><!-- /.scroll-body -->
 
+  <!-- ======== CHECKOUT MODAL ========
+       Opens when a Buy button has data-checkout="open".
+       Flow: customer fills order form → submits to Netlify Forms →
+       sees payment instructions (Venmo or Stripe link, per item).
+       Shervin gets the order via the Netlify Forms email notification.
+       Customer's payment is verified manually before shipping. -->
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="checkout-modal-card">
+      <button class="checkout-modal-close" id="checkout-modal-close" aria-label="Close">&times;</button>
+
+      <!-- Step 1: Order details form -->
+      <div class="checkout-step" id="checkout-step-form">
+        <h3>Order details</h3>
+        <p class="checkout-product-summary" id="checkout-product-summary"></p>
+
+        <form id="checkout-form" name="shop-order" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="shop-order">
+          <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="hp-field" aria-hidden="true">
+            <label for="checkout-website">Website</label>
+            <input type="text" id="checkout-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <input type="hidden" name="product" id="checkout-product-field">
+          <input type="hidden" name="price" id="checkout-price-field">
+          <input type="hidden" name="order_id" id="checkout-order-id-field">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-name">Name *</label>
+              <input type="text" id="checkout-name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="checkout-email">Email *</label>
+              <input type="email" id="checkout-email" name="email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="checkout-phone">Phone</label>
+            <input type="tel" id="checkout-phone" name="phone">
+          </div>
+
+          <div class="form-group">
+            <label for="checkout-address">Shipping address *</label>
+            <textarea id="checkout-address" name="address" required rows="3" placeholder="Name, street, city, state, zip, country"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-quantity">Quantity</label>
+              <input type="number" id="checkout-quantity" name="quantity" value="1" min="1" max="10">
+            </div>
+            <div class="form-group">
+              <label for="checkout-size">Size (if apparel)</label>
+              <input type="text" id="checkout-size" name="size" placeholder="S, M, L, XL">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="checkout-notes">Notes (optional)</label>
+            <textarea id="checkout-notes" name="notes" rows="2" placeholder="Gift message, special requests, anything else"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Continue to payment &rarr;</button>
+        </form>
+      </div>
+
+      <!-- Step 2: Payment instructions -->
+      <div class="checkout-step" id="checkout-step-payment" style="display:none;">
+        <h3>Almost done — send payment</h3>
+        <div class="checkout-payment-content" id="checkout-payment-content"></div>
+        <p class="checkout-payment-footer">
+          Once payment is confirmed, your item ships within a few business days.<br>
+          A confirmation email is on its way to you now.
+        </p>
+        <button type="button" class="btn-submit checkout-modal-done" id="checkout-modal-done">Done</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ======== FOOTER / PARCHMENT BAR ======== -->
   <!-- EDIT: FOOTER — copyright year and name -->
   <footer>
@@ -2034,6 +2265,130 @@
         body: data
       }).then(showBookingSuccess).catch(showBookingSuccess);
     });
+
+    // ---- Checkout Modal ----
+    // Order form → submit to Netlify → show payment instructions per item.
+    // Buttons opt in via data-checkout="open" + data-payment-method="venmo|stripe".
+    // See ONBOARDING "Shop & Payments" section for the full edit guide.
+    (() => {
+      const modal = document.getElementById('checkout-modal');
+      if (!modal) return;
+      const closeBtn = document.getElementById('checkout-modal-close');
+      const form = document.getElementById('checkout-form');
+      const stepForm = document.getElementById('checkout-step-form');
+      const stepPayment = document.getElementById('checkout-step-payment');
+      const productSummary = document.getElementById('checkout-product-summary');
+      const paymentContent = document.getElementById('checkout-payment-content');
+      const doneBtn = document.getElementById('checkout-modal-done');
+      const productField = document.getElementById('checkout-product-field');
+      const priceField = document.getElementById('checkout-price-field');
+      const orderIdField = document.getElementById('checkout-order-id-field');
+
+      let currentItem = null;
+      let formLoadedAt = 0;
+      const MIN_FILL_SECONDS = 3;
+
+      function makeOrderId() {
+        return 'ORD-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+      }
+
+      function open(button) {
+        currentItem = {
+          product: button.dataset.product || 'Item',
+          price: button.dataset.price || '',
+          method: (button.dataset.paymentMethod || 'venmo').toLowerCase(),
+          venmoHandle: (button.dataset.venmoHandle || '').replace(/^@/, ''),
+          stripeLink: button.dataset.stripeLink || '',
+        };
+        const orderId = makeOrderId();
+        productSummary.textContent = `${currentItem.product}${currentItem.price ? ' — $' + currentItem.price : ''}`;
+        productField.value = currentItem.product;
+        priceField.value = currentItem.price;
+        orderIdField.value = orderId;
+        stepForm.style.display = '';
+        stepPayment.style.display = 'none';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        formLoadedAt = Date.now();
+      }
+
+      function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        form.reset();
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[c]);
+      }
+
+      function showPayment() {
+        stepForm.style.display = 'none';
+        stepPayment.style.display = '';
+        let html = '';
+        const price = escapeHtml(currentItem.price);
+        const memo = escapeHtml(orderIdField.value);
+
+        if (currentItem.method === 'venmo' && currentItem.venmoHandle) {
+          const handle = escapeHtml(currentItem.venmoHandle);
+          const venmoUrl = `https://venmo.com/${encodeURIComponent(currentItem.venmoHandle)}?txn=pay&amount=${encodeURIComponent(currentItem.price)}&note=${encodeURIComponent(orderIdField.value)}`;
+          html = `
+            <p class="checkout-payment-amount">$${price}</p>
+            <p>Send via Venmo to:</p>
+            <p class="checkout-payment-handle">@${handle}</p>
+            <p>Include this memo so we match your payment to your order:</p>
+            <p class="checkout-payment-memo">${memo}</p>
+            <a href="${venmoUrl}" target="_blank" rel="noopener" class="checkout-payment-btn">Open Venmo</a>
+          `;
+        } else if (currentItem.method === 'stripe' && currentItem.stripeLink) {
+          html = `
+            <p class="checkout-payment-amount">$${price}</p>
+            <p>Continue to secure checkout via Stripe:</p>
+            <a href="${escapeHtml(currentItem.stripeLink)}" target="_blank" rel="noopener" class="checkout-payment-btn">Open Stripe Checkout</a>
+            <p style="margin-top:1rem;font-size:0.85rem;">Your order info has already been sent — Stripe just handles the payment.</p>
+          `;
+        } else {
+          html = `<p>Email <a href="mailto:shervinx510@gmail.com?subject=Order: ${escapeHtml(currentItem.product)}">shervinx510@gmail.com</a> to complete this order.</p>`;
+        }
+        paymentContent.innerHTML = html;
+      }
+
+      // Wire up Buy buttons that opt into the modal
+      document.querySelectorAll('[data-checkout="open"]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          open(btn);
+        });
+      });
+
+      // Close handlers
+      modal.addEventListener('click', e => { if (e.target === modal) close(); });
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      if (doneBtn) doneBtn.addEventListener('click', close);
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+      });
+
+      // Submit handler — anti-spam, then submit to Netlify Forms, then show payment
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const honeypot = form.querySelector('input[name="website"]');
+        const tooFast = (Date.now() - formLoadedAt) / 1000 < MIN_FILL_SECONDS;
+        if ((honeypot && honeypot.value.trim() !== '') || tooFast) {
+          // Silent success — bots think they got through
+          showPayment();
+          return;
+        }
+        const data = new FormData(form);
+        fetch('/', { method: 'POST', body: data })
+          .then(showPayment)
+          .catch(showPayment);
+      });
+    })();
 
     // ---- Carousel Gallery + Filter (dynamic pagination) ----
     (() => {
