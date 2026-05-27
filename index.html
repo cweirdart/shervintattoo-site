@@ -2373,7 +2373,43 @@
         if (e.key === 'Escape' && modal.classList.contains('open')) close();
       });
 
-      // Submit handler — anti-spam, then submit to Netlify Forms, then show payment
+      // Submit handler — anti-spam, then submit to Netlify Forms AND
+      // client-editor's order-receipt API (buyer confirmation email +
+      // DB record + reminder if unpaid), then show payment.
+      function notifyClientEditor(data) {
+        // Client-editor API: persists the order, emails the buyer a
+        // confirmation, queues a reminder if no manual mark-paid in 24h.
+        // CORS is restricted server-side to known site origins.
+        const details = {};
+        data.forEach((v, k) => {
+          if (typeof v === 'string' &&
+              k !== 'product' && k !== 'price' && k !== 'order_id' &&
+              k !== 'website' && k !== 'bot-field' && k !== 'form-name') {
+            details[k] = v;
+          }
+        });
+        const payload = {
+          siteId: 'shervin',
+          orderRef: orderIdField.value,
+          buyerEmail: String(data.get('email') || '').trim(),
+          buyerName: String(data.get('name') || '').trim(),
+          product: currentItem.product,
+          price: String(currentItem.price || ''),
+          paymentMethods: currentItem.venmoHandle
+            ? [{ platform: currentItem.method || 'venmo', handle: currentItem.venmoHandle }]
+            : [],
+          details,
+        };
+        return fetch('https://client-editor-virid.vercel.app/api/orders/receive', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }).catch(err => {
+          // Non-fatal — the Netlify form submit still emails Shervin.
+          console.warn('client-editor order API failed:', err);
+        });
+      }
+
       form.addEventListener('submit', e => {
         e.preventDefault();
         const honeypot = form.querySelector('input[name="website"]');
@@ -2384,9 +2420,10 @@
           return;
         }
         const data = new FormData(form);
-        fetch('/', { method: 'POST', body: data })
-          .then(showPayment)
-          .catch(showPayment);
+        Promise.allSettled([
+          fetch('/', { method: 'POST', body: data }),
+          notifyClientEditor(data),
+        ]).then(showPayment);
       });
     })();
 
