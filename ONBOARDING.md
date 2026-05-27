@@ -325,11 +325,68 @@ Search for `EDIT: SHOP` on github.com.
 
 ---
 
-## Shop & Payments — selling through Stripe
+## Shop & Payments — three ways to take an order
 
-The site uses **Stripe Payment Links** for shop purchases. Each item's "Buy" button links to a Stripe-hosted checkout page. Stripe handles the cards, the receipts, the shipping address collection, and the payouts to your bank.
+Each buy button can work in one of four modes. Pick whichever fits each product.
 
-### One-time setup
+### Mode A — Sold Out (current default for all 4 items)
+
+```
+<button class="btn-buy sold-out" disabled>Sold Out</button>
+```
+
+Item stays visible on the site with line-through styling. No purchase possible.
+
+### Mode B — Order form on the site → Venmo (no Stripe setup needed)
+
+Customer clicks Buy → a modal pops up with an order form (name, email, address, qty) → customer submits → modal shows your Venmo handle + the exact amount + a unique memo string to use → customer pays via Venmo → you confirm payment in Venmo and ship.
+
+```
+<button class="btn-buy"
+        data-checkout="open"
+        data-product="Stoneware Vessel Vol. 1"
+        data-price="120"
+        data-payment-method="venmo"
+        data-venmo-handle="@shervin-510">Buy Now</button>
+```
+
+Set `data-product`, `data-price`, and `data-venmo-handle` for each item. The customer's order details email you automatically via Netlify Forms.
+
+**Pros:** No Stripe verification wait. No fees on Venmo personal accounts. Personal touch. Works tonight.
+**Cons:** Manual payment confirmation. Two-step UX (form → pay).
+
+### Mode C — Order form on the site → Stripe checkout
+
+Same as Mode B, but instead of showing Venmo instructions after the form submit, the modal shows a "Continue to Stripe" button.
+
+```
+<button class="btn-buy"
+        data-checkout="open"
+        data-product="DIASPORA Shirt"
+        data-price="40"
+        data-payment-method="stripe"
+        data-stripe-link="https://buy.stripe.com/abcXYZ">Buy Now</button>
+```
+
+The order info is captured by Netlify Forms BEFORE the Stripe checkout, so you have the customer's address and notes even if they abandon the Stripe checkout.
+
+**Pros:** Polished Stripe checkout for payment. Order info captured before payment. Hybrid.
+**Cons:** Requires Stripe account. Two-step UX.
+
+### Mode D — Direct to Stripe (no on-site form)
+
+Cleanest one-click flow — customer clicks Buy and goes straight to Stripe checkout. Stripe collects email and shipping address.
+
+```
+<a href="https://buy.stripe.com/abcXYZ" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
+```
+
+**Pros:** Single click, single page. Polished. Stripe handles everything.
+**Cons:** Requires Stripe account verified (1-2 day wait). No site-side capture (you only see orders that actually paid).
+
+---
+
+## Setting up Stripe (only needed for Modes C and D)
 
 You only do this once, ever:
 
@@ -338,9 +395,7 @@ You only do this once, ever:
 3. Link your bank account — routing + account number for payouts
 4. Set your business display name (what customers see at checkout)
 
-### To list a product for sale
-
-For each new product:
+### To create a Stripe Payment Link
 
 1. **In Stripe Dashboard** → **Products** → **+ Add Product**
    - Name, price, photo
@@ -349,56 +404,41 @@ For each new product:
    - Set quantity limit if it's a limited edition
 2. Click **"Create Payment Link"** for that product
 3. Copy the URL — looks like `https://buy.stripe.com/abcXYZ123`
-4. **In `index.html`** (via github.dev or github.com editor), search for `EDIT: SHOP`
-5. Find the shop item you're updating. Replace the `<button>` line with:
-   ```
-   <a href="https://buy.stripe.com/abcXYZ123" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
-   ```
-   (Paste your actual URL in place of the example.)
-6. Commit & push. Buy button is live in ~60 seconds.
+4. Paste it into the buy button — see Mode C or Mode D above
 
-### To mark an item as sold out
+---
 
-The item stays visible on the site, but the button changes to "Sold Out" with line-through styling.
+## Setting up Venmo (only needed for Mode B)
 
-Replace the `<a>` line with:
-```
-<button class="btn-buy sold-out" disabled>Sold Out</button>
-```
+If you don't already have one, create a Venmo account at https://venmo.com. For low volume (under ~$500/month), a **personal** Venmo account is fine and has no fees. Once volume grows, switch to a **business** account (1.9% + $0.10 per transaction).
 
-(Make sure to change the closing tag too — `</a>` → `</button>`.)
+Set your Venmo handle to something professional — e.g., `@shervin-tattoo` rather than your personal handle.
 
-### To put a sold-out item back on sale
+### Per-order Venmo flow (what happens on Shervin's side)
 
-Replace the `<button>` line with:
-```
-<a href="https://buy.stripe.com/abcXYZ123" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
-```
+1. Customer fills the order form on the site
+2. Netlify emails you: name, email, shipping address, item, order ID
+3. Customer pays you Venmo with memo `ORD-XXXXX` (matches the order ID)
+4. You match the Venmo payment to the order email
+5. You reply to the customer confirming the order and a rough ship date
+6. You ship; ideally include the order ID on the packing slip
 
-(Same Stripe URL as before, or a new one if you've created a different payment link.)
+---
 
-### Where do orders show up?
+## Where do orders show up?
 
-- **Email:** Stripe emails you at the address on your Stripe account every time someone buys
-- **Stripe Dashboard:** Real-time order list with shipping addresses, names, payment status
-- **Bank account:** Stripe pays out the balance (minus their fee: 2.9% + 30¢ per transaction) on a rolling 2-day schedule by default
+- **Modes B + C:** Netlify Forms emails you (via the project's notifications) with name + email + shipping address + product + order ID. Customer also gets an auto-reply confirming order received.
+- **Mode D (Stripe direct):** Stripe emails you when payment lands. Customer gets Stripe's receipt.
+- **All modes:** check Netlify Forms dashboard for backup history of submissions.
 
-### When inventory runs out
+## Stripe-side details worth knowing
 
-You have two options:
-1. **In Stripe Dashboard:** archive the product or set quantity limit. Customers who hit the payment link see a "no longer available" message.
-2. **On the website:** switch the `<a>` to `<button class="btn-buy sold-out" disabled>` (see above) so it visibly shows as Sold Out in the shop grid.
-
-Doing both is best — Stripe stops accepting payments AND the site reflects the status.
-
-### Tax, shipping, and policies
-
-These are all configured in Stripe Dashboard, per product or globally:
-- **Stripe Tax** can auto-calculate US state sales tax. Enable in Tax settings.
-- **Shipping rates** — set flat rates by region, or use real-time rates if you have a carrier integration.
-- **Refund policy** — Stripe requires you to have one for physical goods. Write a short paragraph and link it in Stripe's settings.
-
-These are Stripe-Dashboard decisions, not website changes.
+- **Fees:** 2.9% + 30¢ per transaction. On a $100 sale you net ~$96.60.
+- **Payouts:** Stripe transfers the balance to your bank on a rolling 2-day schedule by default. Adjustable in Stripe settings.
+- **Inventory limits:** set a quantity cap when creating a product. Customers see "no longer available" once the cap is hit. Best paired with marking the item Sold Out on the site too.
+- **Tax:** **Stripe Tax** auto-calculates US state sales tax if you enable it. Worth doing for California sellers (state law).
+- **Refund policy:** Stripe requires you to have one for physical goods. A draft is in `REFUND-POLICY.md` in this repo — review it with c.weird before publishing.
+- **Test mode:** Stripe gives you both test and live mode. Use test mode (with test card numbers) to verify the full flow before going live.
 
 ---
 
