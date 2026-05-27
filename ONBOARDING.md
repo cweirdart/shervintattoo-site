@@ -165,6 +165,17 @@ If you want to display the **&** symbol in text, type `&amp;` instead. Example: 
 
 Every opening tag like `<p>` or `<div>` has a matching closing tag like `</p>` or `</div>`. Delete one without the other and the layout breaks.
 
+### Rule 5 — When swapping tag types, change BOTH ends
+
+If you swap a `<button>` for an `<a>` (or vice versa, like when toggling sold-out on a shop item), the closing tag has to change too:
+
+| ✅ Correct | ❌ Broken |
+|---|---|
+| `<a href="...">Buy Now</a>` | `<a href="...">Buy Now</button>` |
+| `<button class="btn-buy sold-out" disabled>Sold Out</button>` | `<button class="btn-buy sold-out" disabled>Sold Out</a>` |
+
+If you only change the opening tag, the browser sees mismatched tags and the page layout can go strange.
+
 ---
 
 ### Stuck or unsure? Two safe escape hatches
@@ -290,24 +301,6 @@ Search for `EDIT: SHOP` on github.com.
 
 **Change a price:** Edit the text inside `<p class="price">...</p>`
 
-**Mark as available:** Change the button from:
-```
-<button class="btn-buy sold-out" disabled>Sold Out</button>
-```
-To:
-```
-<button class="btn-buy">Add to Cart</button>
-```
-
-**Mark as sold out:** Change the button from:
-```
-<button class="btn-buy">Add to Cart</button>
-```
-To:
-```
-<button class="btn-buy sold-out" disabled>Sold Out</button>
-```
-
 **Add a product photo:**
 
 1. **Name the file carefully:** use lowercase letters and hyphens, no spaces. E.g., `tiger-sketch.jpg`, NOT `Tiger Sketch.jpg`.
@@ -329,6 +322,83 @@ To:
 - ❌ `<img src=tiger sketch.jpg>` — missing quotes, and the space breaks everything
 - ❌ `<img src="Tiger Sketch.jpg">` — spaces in filenames need `%20` (just rename the file with hyphens instead)
 - ✅ `<img src="tiger-sketch.jpg" alt="...">` — clean and safe
+
+---
+
+## Shop & Payments — selling through Stripe
+
+The site uses **Stripe Payment Links** for shop purchases. Each item's "Buy" button links to a Stripe-hosted checkout page. Stripe handles the cards, the receipts, the shipping address collection, and the payouts to your bank.
+
+### One-time setup
+
+You only do this once, ever:
+
+1. Sign up at **https://stripe.com** with the email you want on receipts
+2. Complete identity verification — needs your legal name, last 4 of SSN, home address (~1-2 business days to verify)
+3. Link your bank account — routing + account number for payouts
+4. Set your business display name (what customers see at checkout)
+
+### To list a product for sale
+
+For each new product:
+
+1. **In Stripe Dashboard** → **Products** → **+ Add Product**
+   - Name, price, photo
+   - Enable **"Collect shipping address"** (for physical items)
+   - Configure shipping rates and regions (US-only or international)
+   - Set quantity limit if it's a limited edition
+2. Click **"Create Payment Link"** for that product
+3. Copy the URL — looks like `https://buy.stripe.com/abcXYZ123`
+4. **In `index.html`** (via github.dev or github.com editor), search for `EDIT: SHOP`
+5. Find the shop item you're updating. Replace the `<button>` line with:
+   ```
+   <a href="https://buy.stripe.com/abcXYZ123" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
+   ```
+   (Paste your actual URL in place of the example.)
+6. Commit & push. Buy button is live in ~60 seconds.
+
+### To mark an item as sold out
+
+The item stays visible on the site, but the button changes to "Sold Out" with line-through styling.
+
+Replace the `<a>` line with:
+```
+<button class="btn-buy sold-out" disabled>Sold Out</button>
+```
+
+(Make sure to change the closing tag too — `</a>` → `</button>`.)
+
+### To put a sold-out item back on sale
+
+Replace the `<button>` line with:
+```
+<a href="https://buy.stripe.com/abcXYZ123" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
+```
+
+(Same Stripe URL as before, or a new one if you've created a different payment link.)
+
+### Where do orders show up?
+
+- **Email:** Stripe emails you at the address on your Stripe account every time someone buys
+- **Stripe Dashboard:** Real-time order list with shipping addresses, names, payment status
+- **Bank account:** Stripe pays out the balance (minus their fee: 2.9% + 30¢ per transaction) on a rolling 2-day schedule by default
+
+### When inventory runs out
+
+You have two options:
+1. **In Stripe Dashboard:** archive the product or set quantity limit. Customers who hit the payment link see a "no longer available" message.
+2. **On the website:** switch the `<a>` to `<button class="btn-buy sold-out" disabled>` (see above) so it visibly shows as Sold Out in the shop grid.
+
+Doing both is best — Stripe stops accepting payments AND the site reflects the status.
+
+### Tax, shipping, and policies
+
+These are all configured in Stripe Dashboard, per product or globally:
+- **Stripe Tax** can auto-calculate US state sales tax. Enable in Tax settings.
+- **Shipping rates** — set flat rates by region, or use real-time rates if you have a carrier integration.
+- **Refund policy** — Stripe requires you to have one for physical goods. Write a short paragraph and link it in Stripe's settings.
+
+These are Stripe-Dashboard decisions, not website changes.
 
 ---
 

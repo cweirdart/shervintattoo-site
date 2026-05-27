@@ -1188,6 +1188,7 @@
       background: transparent;
       cursor: pointer;
       transition: all 0.2s;
+      text-decoration: none; /* needed when btn-buy is used on <a> for Stripe links */
     }
     .shop-item-info .btn-buy:hover {
       background: var(--color-ink);
@@ -1828,14 +1829,28 @@
   </section>
 
   <!-- ======== SHOP ======== -->
-  <!-- EDIT: SHOP — product names, prices, and sold-out status.
-       To mark an item as AVAILABLE: change "Sold Out" button text, remove
-       the "sold-out" class and "disabled" attribute from the button.
-       To mark as SOLD OUT: add class="btn-buy sold-out" disabled to the button.
-       To ADD a product image: replace <div class="shop-item-image">Sold out</div>
-       with <div class="shop-item-image"><img src="your-image.jpg" alt="Product name"></div>
-       To ADD a new product: copy an entire <div class="shop-item">...</div> block.
-       To REMOVE a product: delete the entire <div class="shop-item">...</div> block. -->
+  <!-- EDIT: SHOP — manage products and payment links.
+
+       TO MAKE AN ITEM AVAILABLE FOR PURCHASE:
+       1. Create a Stripe Payment Link at dashboard.stripe.com/payment-links
+          (set name, price, product photo, shipping address collection)
+       2. Copy the URL (looks like https://buy.stripe.com/xxxxxxx)
+       3. Replace the <button> with:
+            <a href="PASTE_STRIPE_URL_HERE" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
+
+       TO MARK AS SOLD OUT (item stays visible, just unavailable):
+       Replace the <a> with:
+            <button class="btn-buy sold-out" disabled>Sold Out</button>
+
+       TO ADD A PRODUCT IMAGE:
+       Replace <div class="shop-item-image">Sold out</div>
+       with    <div class="shop-item-image"><img src="your-image.jpg" alt="Product name"></div>
+       (use lowercase filename with hyphens, no spaces; keep under 500 KB)
+
+       TO ADD A NEW PRODUCT: copy an entire <div class="shop-item">...</div> block.
+       TO REMOVE A PRODUCT: delete the entire <div class="shop-item">...</div> block.
+
+       Order notifications: Stripe emails Shervin automatically when someone buys. -->
   <section id="shop">
     <div class="container">
       <div class="shop-header">
@@ -1869,7 +1884,7 @@
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image"><img src="tiger-sketch.jpg" <img src="tiger-sketch.jpg" alt="Original Sketch — tiger sketch"></div>
+          <div class="shop-item-image"><img src="tiger-sketch.jpg" alt="Original Sketch — tiger sketch"></div>
           <div class="shop-item-info">
             <h3>Original Sketches</h3>
             <p class="price">$100</p>
