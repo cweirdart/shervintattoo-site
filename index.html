@@ -537,9 +537,12 @@
     .nav-flower {
       height: 34px;
       width: auto;
-      opacity: 0.75;
+      opacity: 0.9;
       pointer-events: none;
       flex-shrink: 0;
+      /* gold outer glow so the dark ink reads against the dark bar
+         (two layers max — chained drop-shadows over-brighten on iPad) */
+      filter: drop-shadow(0 0 5px rgba(212, 184, 106, 0.65)) drop-shadow(0 0 12px rgba(212, 184, 106, 0.35));
     }
 
     nav .logo {
@@ -1879,31 +1882,37 @@
           <!-- EDIT: GALLERY ITEMS — each line below is one portfolio piece.
                The carousel auto-paginates them 6 per page. -->
           <div class="carousel-page">
-            <div class="gallery-item gallery-item--captioned" data-category="flash">
-              <video src="hero-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+            <div class="gallery-item gallery-item--captioned" data-category="flash"><video src="hero-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
               <p class="gallery-caption">300+ pages of flash&mdash;<a href="#booking">Book</a> to view in person</p>
             </div>
-            <div class="gallery-item"><img src="Work/1%20Shervin_tattooing_byextraekster.jpg" alt="Shervin tattooing at his San Francisco studio" loading="lazy"></div>
-            <div class="gallery-item" data-category="color"><img src="Work/2%20Shervin_tattooing_byextraekster.jpg" alt="Shervin tattooing a custom piece" loading="lazy"></div>
-            <div class="gallery-item" data-category="color"><img src="Work/3.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/4%2020260403_140729.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/5.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item"><img src="Work/1%20Shervin_tattooing_byextraekster.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="color"><img src="Work/2%20Shervin_tattooing_byextraekster.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="color"><img src="Work/3.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/4%2020260403_140729.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/5.jpg" alt="" loading="lazy"></div>
+          </div>
+          <div class="carousel-page">
             <div class="gallery-item" data-category="black-and-grey"><video src="Work/6%2020260315_205439.mp4" muted loop playsinline webkit-playsinline preload="auto"></video></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/7.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/8%2020260402_225211.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="color"><img src="Work/9%20cweird_dragon_scarygary.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/10%2020250731_215302.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/11%2020250704_141204.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/12.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/13.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/14%2020260405_190159.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/15%2020251113_171308.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/7.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/8%2020260402_225211.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="color"><img src="Work/9%20cweird_dragon_scarygary.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/10%2020250731_215302.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/1000063016.jpg" alt="" loading="lazy"></div>
+          </div>
+          <div class="carousel-page">
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/11%2020250704_141204.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/12.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/13.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/14%2020260405_190159.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/15%2020251113_171308.jpg" alt="" loading="lazy"></div>
             <div class="gallery-item" data-category="black-and-grey"><video src="Work/16.mp4" muted loop playsinline webkit-playsinline preload="auto"></video></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/17.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="black-and-grey"><img src="Work/18.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="flash"><img src="Work/19.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item"><img src="Work/20.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
-            <div class="gallery-item" data-category="flash"><img src="Work/21.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
+          </div>
+          <div class="carousel-page">
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/17.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="black-and-grey"><img src="Work/18.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="flash"><img src="Work/19.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item"><img src="Work/20.jpg" alt="" loading="lazy"></div>
+            <div class="gallery-item" data-category="flash"><img src="Work/21.jpg" alt="" loading="lazy"></div>
           </div>
         </div>
         </div><!-- /.carousel-window -->
@@ -2145,7 +2154,7 @@
 
       <div class="shop-grid">
         <div class="shop-item fade-in">
-          <div class="shop-item-image">Available</div>
+          <div class="shop-item-image"></div>
           <div class="shop-item-info">
             <h3>Limited Edition Flash Sheet 1/50</h3>
             <p class="price">$80</p>
@@ -2154,7 +2163,7 @@
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image">Available</div>
+          <div class="shop-item-image"></div>
           <div class="shop-item-info">
             <h3>&ldquo;DIASPORA&rdquo; Limited Edition Shirt</h3>
             <p class="price">$40</p>
@@ -2163,7 +2172,7 @@
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image">Available</div>
+          <div class="shop-item-image"></div>
           <div class="shop-item-info">
             <h3>Stoneware Vessel Vol. 1</h3>
             <p class="price">$120</p>
@@ -2172,14 +2181,15 @@
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image"><img src="tiger-sketch.jpg" alt="Original Sketch — tiger sketch"></div>
+          <div class="shop-item-image"><img src="tiger-sketch.jpg" alt="Original Sketches" loading="lazy"></div>
           <div class="shop-item-info">
             <h3>Original Sketches</h3>
-            <p class="price">$100</p>
-            <button class="btn-buy" data-checkout="open" data-product="Original Sketches" data-price="100" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <p class="price">$150</p>
+            <button class="btn-buy sold-out" data-product="Original Sketches" data-price="150" disabled>Sold Out</button>
             <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
+        <!-- client-editor: built-in checkout modal skipped (this file has its own <form name="shop-order">). -->
       </div>
 
     </div>
@@ -2383,7 +2393,7 @@
               <option value="" disabled selected>Select one</option>
               <option value="Tattoo question">Tattoo question</option>
               <option value="Shop item">Shop item</option>
-              <option value="Ceramics &amp; one-off pieces">Ceramics &amp; one-off pieces</option>
+              <option value="Ceramics">Ceramics</option>
               <option value="Custom artwork / commission">Custom artwork / commission</option>
               <option value="Guest spot / travel">Guest spot / travel</option>
               <option value="Art licensing / press">Art licensing / press</option>
