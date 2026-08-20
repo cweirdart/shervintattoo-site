@@ -878,6 +878,16 @@
 
     @media (max-width: 768px) {
       .carousel-page { grid-template-columns: repeat(2, 1fr); }
+
+      /* Mobile: no side gutters — photos get the full width and the arrows
+         overlap the photo edges instead (shadowed for contrast) */
+      .carousel-wrap { padding: 0; }
+      .carousel-arrow {
+        color: #fff;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+      }
+      .carousel-arrow.prev { left: 4px; }
+      .carousel-arrow.next { right: 4px; }
     }
 
     /* ---- About ---- */
