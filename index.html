@@ -1672,25 +1672,22 @@
         margin-bottom: var(--space-sm);
       }
 
-      /* Contact: keep the horizontal pomegranate | card | skull row on mobile,
-         scaled to fit one screen width */
+      /* Contact: stack pomegranate → card → skull vertically on mobile */
       .contact-layout {
-        flex-wrap: nowrap;
-        gap: var(--space-sm);
-        padding: 0 var(--space-sm);
+        flex-direction: column;
+        gap: var(--space-md);
       }
       .contact-side-img {
-        width: clamp(56px, 18vw, 90px);
+        width: clamp(120px, 38vw, 160px);
         height: auto; /* mobile keeps width-based sizing */
       }
       .card-scene {
-        width: min(44vw, 200px);
+        width: min(72vw, 320px);
       }
       .contact-side-label {
-        /* on mobile the text drops below the card's bottom edge
-           (offset mirrors the mobile .card-scene width formula) */
-        top: calc(50% + min(44vw, 200px) / 3.5 + 0.5rem);
-        transform: translateX(-50%);
+        /* in the stack, labels flow under their illustration normally */
+        position: static;
+        transform: none;
       }
     }
 
