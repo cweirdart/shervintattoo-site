@@ -3033,19 +3033,19 @@
       });
     })();
 
-    // ---- Hero video: high-quality variant for big screens ----
-    // Phones keep the light 1.5MB H.264 (fast on cellular); screens with a
-    // shortest side >= 768px get a near-original-quality encode: HEVC where
-    // playable (Safari, most Chrome), AV1 otherwise (Firefox). If the video
-    // is ever swapped via the client editor, the filename no longer matches
-    // and this steps aside so the new video plays everywhere.
+    // ---- Hero video: high-quality variant ----
+    // Any device that can decode HEVC (all modern iPhones/Macs, most Chrome)
+    // or AV1 (Firefox, modern Android) gets the near-original-quality encode
+    // (~2.9MB); the light 1.5MB H.264 stays as the fallback for old hardware
+    // and for users with data-saver on. If the video is ever swapped via the
+    // client editor, the filename no longer matches and this steps aside so
+    // the new video plays everywhere.
     (() => {
       const vid = document.querySelector('#hero video');
       const src = vid && vid.querySelector('source');
       if (!vid || !src) return;
       if ((src.getAttribute('src') || '') !== 'hero-video.mp4') return;
       if (navigator.connection && navigator.connection.saveData) return;
-      if (Math.min(screen.width, screen.height) < 768) return;
       let pick = '';
       if (vid.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') || vid.canPlayType('video/mp4; codecs="hvc1"')) {
         pick = 'hero-video-hevc.mp4';
@@ -3079,14 +3079,20 @@
       heroVid.addEventListener('loadedmetadata', tryPlay);
       heroVid.addEventListener('canplay', tryPlay);
 
-      // If autoplay was blocked (iOS Low Power Mode, etc.), kick it off
-      // on the first user interaction anywhere on the page.
+      // If autoplay was blocked (iOS Low Power Mode, etc.), kick it off on
+      // user interaction — and keep retrying on every interaction until it
+      // actually plays (a one-shot attempt can fire at a bad moment, e.g.
+      // mid-download on cellular, and then never try again).
+      const kickEvents = ['touchstart', 'touchend', 'click', 'scroll'];
       const kickstart = () => {
         if (heroVid.paused) tryPlay();
       };
-      ['touchstart', 'touchend', 'click', 'scroll'].forEach(ev => {
-        document.addEventListener(ev, kickstart, { once: true, passive: true });
+      kickEvents.forEach(ev => {
+        document.addEventListener(ev, kickstart, { passive: true });
       });
+      heroVid.addEventListener('playing', () => {
+        kickEvents.forEach(ev => document.removeEventListener(ev, kickstart));
+      }, { once: true });
 
       // Keep it looping (some mobile browsers stop at end)
       heroVid.addEventListener('ended', () => { heroVid.currentTime = 0; tryPlay(); });
