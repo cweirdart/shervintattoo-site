@@ -1957,11 +1957,11 @@
       </div>
 
       <!-- EDIT: BOOKING FORM — labels and hints shown on the booking form -->
-      <form id="booking-form" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+      <form id="booking-form" name="booking" method="POST" data-netlify="true" netlify-honeypot="website" enctype="multipart/form-data">
         <input type="hidden" name="form-name" value="booking">
-        <!-- Netlify's native honeypot (server-side filtered) -->
-        <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-        <!-- Secondary honeypot — off-screen, not display:none. Checked in JS on submit. -->
+        <!-- "website" honeypot — off-screen, not display:none (smart bots skip
+             display:none). Netlify checks it server-side and keeps it out of
+             notification emails; JS checks it again on submit. -->
         <div class="hp-field" aria-hidden="true">
           <label for="website-url">Website</label>
           <input type="text" id="website-url" name="website" tabindex="-1" autocomplete="off">
@@ -2289,9 +2289,8 @@
         <h3>Order details</h3>
         <p class="checkout-product-summary" id="checkout-product-summary"></p>
 
-        <form id="checkout-form" name="shop-order" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form id="checkout-form" name="shop-order" method="POST" data-netlify="true" netlify-honeypot="website">
           <input type="hidden" name="form-name" value="shop-order">
-          <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
           <div class="hp-field" aria-hidden="true">
             <label for="checkout-website">Website</label>
             <input type="text" id="checkout-website" name="website" tabindex="-1" autocomplete="off">
@@ -2300,6 +2299,7 @@
           <input type="hidden" name="product" id="checkout-product-field">
           <input type="hidden" name="price" id="checkout-price-field">
           <input type="hidden" name="order_id" id="checkout-order-id-field">
+          <input type="hidden" name="subject" id="checkout-subject-field">
 
           <div class="form-row">
             <div class="form-group">
@@ -2369,15 +2369,19 @@
         <h3>Contact Shervin</h3>
         <p class="checkout-product-summary" id="contact-product-summary"></p>
 
-        <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="website">
           <input type="hidden" name="form-name" value="contact">
-          <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <!-- "website" is the honeypot: Netlify checks it server-side AND
+               excludes it from notification emails -->
           <div class="hp-field" aria-hidden="true">
             <label for="contact-website">Website</label>
             <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
           </div>
 
           <input type="hidden" name="product" id="contact-product-field">
+          <!-- Netlify uses a field named "subject" as the notification email's
+               subject line — filled by JS from the inquiry type + product -->
+          <input type="hidden" name="subject" id="contact-subject-field">
 
           <div class="form-row">
             <div class="form-group">
@@ -2542,6 +2546,9 @@
         productField.value = currentItem.product;
         priceField.value = currentItem.price;
         orderIdField.value = orderId;
+        // Netlify uses the "subject" field as the notification email subject
+        document.getElementById('checkout-subject-field').value =
+          'Order ' + orderId + ' — ' + currentItem.product;
         stepForm.style.display = '';
         stepPayment.style.display = 'none';
         modal.classList.add('open');
@@ -3228,7 +3235,15 @@
           showSuccess();
           return;
         }
-        fetch('/', { method: 'POST', body: new FormData(form) })
+        // Email subject leads with what they picked: "Shop item: Stoneware
+        // Vessel Vol. 1 — shervintattoo.com"
+        const product = (productField.value || '').trim();
+        const inquiry = inquirySelect.value || 'Inquiry';
+        document.getElementById('contact-subject-field').value =
+          inquiry + (product ? ': ' + product : '') + ' — shervintattoo.com';
+        const data = new FormData(form);
+        if (!data.get('product')) data.delete('product'); /* skip the empty line in the email */
+        fetch('/', { method: 'POST', body: data })
           .then(showSuccess)
           .catch(showSuccess);
       });
