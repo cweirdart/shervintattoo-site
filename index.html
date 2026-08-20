@@ -3279,9 +3279,12 @@
           rotor.classList.remove('spinning');
           void rotor.offsetWidth; /* restart the animation on rapid re-taps */
           rotor.classList.add('spinning');
-          // External links (Instagram): hold navigation a beat so the spin
-          // is visible before the new tab takes focus
-          if (a.target === '_blank') {
+          // External links (Instagram): on desktop, hold navigation a beat so
+          // the spin is visible before the new tab takes focus. On touch
+          // devices, let the browser handle target=_blank natively — a delayed
+          // window.open outlives the tap's user activation there, gets
+          // popup-blocked, and the fallback used to navigate in the SAME tab.
+          if (a.target === '_blank' && !window.matchMedia('(hover: none)').matches) {
             e.preventDefault();
             setTimeout(() => {
               const w = window.open(a.href, '_blank', 'noopener');
