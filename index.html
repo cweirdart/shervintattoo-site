@@ -537,12 +537,10 @@
     .nav-flower {
       height: 34px;
       width: auto;
+      /* gold-tinted artwork (…_gold.png) — no glow; glows blurred on mobile */
       opacity: 0.9;
       pointer-events: none;
       flex-shrink: 0;
-      /* gold outer glow so the dark ink reads against the dark bar
-         (two layers max — chained drop-shadows over-brighten on iPad) */
-      filter: drop-shadow(0 0 5px rgba(212, 184, 106, 0.65)) drop-shadow(0 0 12px rgba(212, 184, 106, 0.35));
     }
 
     nav .logo {
@@ -1770,9 +1768,9 @@
     <div class="nav-bar">
     <div class="nav-inner">
       <div class="nav-brand">
-        <img src="Shervin_flower_left.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (left) -->
+        <img src="Shervin_flower_left_gold.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (left) -->
         <a href="#hero" class="logo">Tattooing by Shervin</a> <!-- EDIT: nav brand text -->
-        <img src="Shervin_flower_right.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (right) -->
+        <img src="Shervin_flower_right_gold.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (right) -->
       </div>
       <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
       <ul class="nav-links">
@@ -2133,7 +2131,7 @@
        <a href="https://buy.stripe.com/abcXYZ" target="_blank" rel="noopener" class="btn-buy">Buy Now</a>
 
        TO ADD A PRODUCT IMAGE:
-       Replace <div class="shop-item-image">Sold out</div>
+       Replace <div class="shop-item-image">Available</div>
        with    <div class="shop-item-image"><img src="your-image.jpg" alt="Product name"></div>
        (use lowercase filename with hyphens, no spaces; keep under 500 KB)
 
@@ -2154,7 +2152,7 @@
 
       <div class="shop-grid">
         <div class="shop-item fade-in">
-          <div class="shop-item-image">Sold out</div>
+          <div class="shop-item-image">Available</div>
           <div class="shop-item-info">
             <h3>Limited Edition Flash Sheet 1/50</h3>
             <p class="price">$80</p>
@@ -2163,7 +2161,7 @@
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image">Sold out</div>
+          <div class="shop-item-image">Available</div>
           <div class="shop-item-info">
             <h3>&ldquo;DIASPORA&rdquo; Limited Edition Shirt</h3>
             <p class="price">$40</p>
@@ -2172,7 +2170,7 @@
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image">Sold out</div>
+          <div class="shop-item-image">Available</div>
           <div class="shop-item-info">
             <h3>Stoneware Vessel Vol. 1</h3>
             <p class="price">$120</p>
@@ -3033,6 +3031,30 @@
         const dx = Math.abs(e.changedTouches[0].clientX - lTX);
         if (dx > 40) flipLBY();
       });
+    })();
+
+    // ---- Hero video: high-quality variant for big screens ----
+    // Phones keep the light 1.5MB H.264 (fast on cellular); screens with a
+    // shortest side >= 768px get a near-original-quality encode: HEVC where
+    // playable (Safari, most Chrome), AV1 otherwise (Firefox). If the video
+    // is ever swapped via the client editor, the filename no longer matches
+    // and this steps aside so the new video plays everywhere.
+    (() => {
+      const vid = document.querySelector('#hero video');
+      const src = vid && vid.querySelector('source');
+      if (!vid || !src) return;
+      if ((src.getAttribute('src') || '') !== 'hero-video.mp4') return;
+      if (navigator.connection && navigator.connection.saveData) return;
+      if (Math.min(screen.width, screen.height) < 768) return;
+      let pick = '';
+      if (vid.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') || vid.canPlayType('video/mp4; codecs="hvc1"')) {
+        pick = 'hero-video-hevc.mp4';
+      } else if (vid.canPlayType('video/mp4; codecs="av01.0.08M.08"')) {
+        pick = 'hero-video-av1.mp4';
+      }
+      if (!pick) return;
+      src.setAttribute('src', pick);
+      vid.load();
     })();
 
     // ---- Force hero video loop + mobile autoplay fallback ----
