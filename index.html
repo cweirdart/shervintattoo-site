@@ -44,7 +44,7 @@
   <meta name="pinterest" content="nopin" description="All artwork © Shervin Tattoo. DM @shervin.510 for licensing.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Parastoo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Cloudflare Turnstile (invisible CAPTCHA for booking form) -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -57,6 +57,42 @@
        Design: Dark parchment with warm brown header/footer.
        Persian calligraphy logo + ornamental flowers.
        ============================================ */
+
+    /* Parastoo (Persian; OFL license, by Saber Rastikerdar) — self-hosted so we
+       can control size-adjust. Two flavors from one 22KB file:
+       - 'Parastoo': true size, for standalone Farsi (hero line).
+       - 'Parastoo Matched': scaled up so Farsi inline with English titles
+         matches their visual height (Persian script carries its bulk at
+         x-height scale, so it reads smaller at equal font-size). */
+    @font-face {
+      font-family: 'Parastoo';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('fonts/parastoo-arabic-v3.woff2') format('woff2');
+      unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+    }
+    @font-face {
+      font-family: 'Parastoo Matched';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      size-adjust: 122%;
+      src: url('fonts/parastoo-arabic-v3.woff2') format('woff2');
+      unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+    }
+    /* Third flavor for the mono/label contexts: those set Latin in ALL CAPS,
+       which reads taller than mixed-case, so the Farsi needs a bigger boost
+       there than next to the serif headings. */
+    @font-face {
+      font-family: 'Parastoo Matched Caps';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      size-adjust: 145%;
+      src: url('fonts/parastoo-arabic-v3.woff2') format('woff2');
+      unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+    }
 
     /* EDIT: COLORS — change hex values to restyle the whole site.
        "paper" = backgrounds, "ink" = text, "accent/gold" = highlights,
@@ -85,10 +121,18 @@
       --color-dowel-light: #5c4a34;
       --color-dowel-dark: #1e1610;
 
-      /* EDIT: FONTS — change font families here */
-      --font-display: 'Cormorant Garamond', 'Georgia', serif;
-      --font-body: 'DM Sans', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      /* EDIT: FONTS — change font families here.
+         Two-font system: Cormorant Garamond (display) + JetBrains Mono
+         (everything else — nav, labels, body, forms). Parastoo is a script
+         exception: it only exists because Latin fonts have no Farsi glyphs. */
+      /* 'Parastoo Matched' sits second in each stack: the Latin fonts have no
+         Arabic glyphs, so Farsi characters anywhere fall through to it (at
+         matched visual height) while Latin text is untouched. Lets titles mix
+         English · فارسی in one text node (keeps client-editor EDIT markers
+         working). The hero's standalone Farsi line uses true-size Parastoo. */
+      --font-display: 'Cormorant Garamond', 'Parastoo Matched', 'Georgia', serif;
+      --font-body: 'JetBrains Mono', 'Parastoo Matched', monospace;
+      --font-mono: 'JetBrains Mono', 'Parastoo Matched Caps', monospace;
       --font-farsi: 'Parastoo', 'Cormorant Garamond', serif;
 
       --space-xs: 0.5rem;
@@ -206,7 +250,10 @@
       background: var(--color-paper) url('paper-texture.jpg');
       background-size: 512px 512px;
       min-height: 100vh;
-      animation: unfurl 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      /* No fill-mode: the final keyframe matches the natural state, and keeping
+         a clip-path applied forever forces the whole page into one giant GPU
+         surface — which glitches/blacks out on iPad and other 2x screens. */
+      animation: unfurl 2.2s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     @keyframes unfurl {
@@ -225,7 +272,7 @@
     /* ---- Contact Section ---- */
     .contact-header {
       text-align: center;
-      margin-bottom: var(--space-lg);
+      margin-bottom: var(--space-md);
     }
     .contact-header h2 {
       font-size: clamp(2rem, 5vw, 3.2rem);
@@ -238,12 +285,13 @@
       align-items: center;
       justify-content: center;
       gap: var(--space-lg);
-      max-width: var(--max-width);
+      max-width: 1400px; /* wider than --max-width so the trio can fill desktop screens */
       margin: 0 auto;
       padding: 0 var(--space-md);
     }
 
     .contact-side {
+      position: relative; /* anchors the hanging label below */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -258,16 +306,29 @@
     }
 
     .contact-side-img {
-      width: 180px;
+      /* Sized by height: both illustrations reach just under the business
+         card's full height (card = width/1.75), minus the band the pinned
+         labels sit in. Width stays auto — aspect ratios preserved. */
+      height: calc(clamp(300px, 36vw, 500px) / 1.75 - 38px);
+      width: auto;
       max-width: 100%;
-      height: auto;
       filter: drop-shadow(0 0 10px rgba(212, 184, 106, 0.35));
       transition: filter 0.3s;
     }
 
     .contact-side-label {
+      /* Absolute (outside the flex height) so the illustrations center against
+         the business card; bottom edge pinned level with the card's bottom.
+         The offset mirrors .card-scene's width formula: card height =
+         width / 1.75, so half of it = width / 3.5 below the shared center. */
+      position: absolute;
+      top: calc(50% + clamp(300px, 36vw, 500px) / 3.5);
+      left: 50%;
+      transform: translate(-50%, -100%);
+      line-height: 1;
+      white-space: nowrap;
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: clamp(0.8rem, 2vw, 1.7rem); /* scales up with the enlarged desktop images */
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--color-accent);
@@ -277,9 +338,45 @@
       text-shadow: 0 0 10px rgba(212, 184, 106, 0.5);
     }
 
+    /* Coin-spin on tap/click for the contact illustrations. The 3D wrapper is
+       built at runtime (JS) so the editable <img> markup — and its client-editor
+       marker — stays untouched. Back face is the artwork's own silhouette
+       (blank, no mirrored illustration) with a soft gold rim. */
+    .coin-wrap { display: block; perspective: 900px; }
+    @media (min-width: 769px) {
+      /* optical nudge: lift the illustrations toward the card's top edge;
+         labels stay pinned to the card's bottom (they're positioned off the
+         anchor box, which doesn't move) */
+      .coin-wrap { transform: translateY(-16px); }
+    }
+    .coin-rotor { position: relative; display: block; transform-style: preserve-3d; }
+    .coin-rotor.spinning { animation: coin-spin 0.45s cubic-bezier(0.32, 0.05, 0.35, 1); }
+    @keyframes coin-spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(720deg); }
+    }
+    .coin-rotor .contact-side-img {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .coin-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      filter: brightness(0) drop-shadow(0 0 6px rgba(212, 184, 106, 0.4));
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .coin-rotor.spinning { animation: none; }
+    }
+
     /* ---- Business Card 3D ---- */
     .card-section {
-      padding: var(--space-xl) 0 var(--space-lg);
+      padding: var(--space-md) 0 var(--space-lg); /* tighter gap below Shop */
       perspective: 1200px;
       -webkit-perspective: 1200px;
     }
@@ -292,7 +389,7 @@
     }
 
     .card-scene {
-      width: 340px;
+      width: clamp(300px, 36vw, 500px);
       aspect-ratio: 1.75 / 1;
       position: relative;
       user-select: none;
@@ -428,18 +525,26 @@
       position: relative;
     }
 
-    /* Flower ornaments in header corners */
+    /* Brand lockup: flower · Tattooing by Shervin · flower, left-aligned —
+       echoes the hero's calligraphy-with-flowers arrangement */
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
     .nav-flower {
-      height: 28px;
+      height: 34px;
       width: auto;
-      opacity: 0.5;
+      opacity: 0.75;
       pointer-events: none;
       flex-shrink: 0;
     }
 
     nav .logo {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: clamp(1.15rem, 1.8vw, 1.55rem);
       font-weight: 700;
       color: var(--color-gold-light);
       letter-spacing: 0.02em;
@@ -462,6 +567,7 @@
     #hero {
       position: relative;
       height: 100vh;
+      height: 100svh; /* small-viewport height: stable when mobile URL bars collapse */
       min-height: 600px;
       overflow: hidden;
       display: flex;
@@ -518,7 +624,10 @@
       max-height: 48vh; /* never exceed ~half the viewport so logo + text below fit */
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(212, 184, 106, 0.95)) drop-shadow(0 0 40px rgba(212, 184, 106, 0.7)) drop-shadow(0 0 80px rgba(232, 204, 126, 0.5)) drop-shadow(0 0 130px rgba(232, 204, 126, 0.3));
+      /* Two layers max: chained drop-shadows compound differently per browser
+         (extra-bright on iPad Safari) and the huge 80/130px layers rendered as
+         a wide cloud with a hard clipped edge. Two modest layers hug the art. */
+      filter: drop-shadow(0 0 14px rgba(212, 184, 106, 0.85)) drop-shadow(0 0 34px rgba(212, 184, 106, 0.45));
     }
 
     .hero-tagline {
@@ -546,11 +655,9 @@
       color: #000;
       margin-bottom: var(--space-md);
       text-shadow:
-        0 0 6px rgba(255, 240, 190, 1),
-        0 0 14px rgba(232, 204, 126, 0.95),
-        0 0 28px rgba(212, 184, 106, 0.85),
-        0 0 52px rgba(212, 184, 106, 0.55),
-        0 0 90px rgba(232, 204, 126, 0.35);
+        0 0 5px rgba(255, 240, 190, 0.85),
+        0 0 12px rgba(232, 204, 126, 0.6),
+        0 0 26px rgba(212, 184, 106, 0.4);
     }
 
     .hero-cta-group {
@@ -558,24 +665,6 @@
       flex-direction: column;
       align-items: stretch;
       gap: var(--space-sm);
-    }
-
-    .hero-cta-subtitle {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 500;
-      font-size: clamp(0.95rem, 2.6vw, 1.2rem);
-      letter-spacing: 0.01em;
-      color: #fff;
-      margin: 0;
-      text-align: center;
-      line-height: 1.35;
-      align-self: center;
-      max-width: min(90vw, 460px);
-      text-shadow:
-        0 0 6px rgba(0, 0, 0, 0.9),
-        0 0 14px rgba(212, 184, 106, 0.6),
-        0 0 28px rgba(212, 184, 106, 0.3);
     }
 
     .hero-farsi {
@@ -595,9 +684,9 @@
 
     .hero-cta {
       display: inline-block;
-      padding: 0.75rem 2rem;
+      padding: clamp(0.8rem, 1.1vw, 1rem) 2rem; /* lower profile; width set by the lockup script */
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: clamp(0.72rem, 1.25vw, 1.2rem); /* text scales with the taller button */
       letter-spacing: 0.12em;
       text-transform: uppercase;
       background: var(--color-accent);
@@ -609,7 +698,7 @@
     .hero-cta:hover { background: var(--color-accent-hover); color: var(--color-paper-dark); box-shadow: 0 0 15px rgba(184, 154, 82, 0.6), 0 0 30px rgba(184, 154, 82, 0.3); }
 
     /* ---- Work / Portfolio ---- */
-    #work { padding: var(--space-xl) 0; }
+    #work { padding: var(--space-lg) 0; }
 
     .work-header {
       display: flex;
@@ -654,6 +743,12 @@
     /* ---- Carousel Gallery ---- */
     .carousel-wrap {
       position: relative;
+      /* side gutters keep the arrows fully outside the photos */
+      padding: 0 clamp(44px, 6vw, 76px);
+    }
+
+    /* inner window does the clipping so arrows can sit outside it */
+    .carousel-window {
       overflow: hidden;
     }
 
@@ -662,29 +757,27 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 5;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--color-border);
-      background: rgba(22, 20, 18, 0.85);
-      color: var(--color-ink-light);
-      font-size: 1.2rem;
+      /* no box — bare glyph; the button box stays as a generous tap target */
+      width: clamp(38px, 3.6vw, 54px);
+      height: clamp(38px, 3.6vw, 54px);
+      padding: 0;
+      border: none;
+      background: none;
+      color: var(--color-ink);
+      font-size: clamp(1.5rem, 2.2vw, 2.2rem);
       cursor: url('260412v2_grayblue_evileye_cursor.png') 16 16, pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
-      backdrop-filter: blur(4px);
+      transition: color 0.2s, opacity 0.2s;
     }
 
     .carousel-arrow:hover {
-      background: rgba(22, 20, 18, 0.95);
-      border-color: var(--color-accent);
       color: var(--color-accent);
     }
 
-    .carousel-arrow.prev { left: 8px; }
-    .carousel-arrow.next { right: 8px; }
+    .carousel-arrow.prev { left: 0; }
+    .carousel-arrow.next { right: 0; }
     .carousel-arrow:disabled { opacity: 0.3; pointer-events: none; }
 
     .carousel-track {
@@ -710,6 +803,7 @@
       overflow: hidden;
       cursor: pointer;
       position: relative;
+      container-type: inline-size; /* lets the caption scale with the tile (cqw units) */
     }
 
     .gallery-item img,
@@ -724,15 +818,23 @@
     .gallery-item:hover video { transform: scale(1.05); }
 
     .gallery-caption {
+      /* Centered on the video (not bottom-anchored): the screenshot deterrent
+         comes from sitting mid-frame, so it works at every device size without
+         the text needing to be huge. Styled to match the lightbox caption. */
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: var(--space-sm);
-      background: linear-gradient(to top, rgba(10, 8, 6, 0.92) 0%, rgba(10, 8, 6, 0.6) 55%, rgba(10, 8, 6, 0) 100%);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 86%;
+      padding: 0.7em 1em;
+      background: rgba(10, 8, 6, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(212, 184, 106, 0.35);
       color: #fff;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.7rem; /* fallback for browsers without container queries */
+      font-size: clamp(0.65rem, 4.5cqw, 1rem);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-align: center;
@@ -779,7 +881,7 @@
 
     /* ---- About ---- */
     #about {
-      padding: var(--space-xl) 0;
+      padding: var(--space-lg) 0;
       background: rgba(30, 27, 24, 0.6);
       border-top: 1px solid var(--color-gold-dim);
       border-bottom: 1px solid var(--color-gold-dim);
@@ -839,8 +941,8 @@
     .about-detail .label { margin-bottom: 0.15rem; }
 
     .about-detail span {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-family: var(--font-body); /* match the bio paragraphs */
+      font-size: 1rem;
       color: var(--color-ink);
     }
 
@@ -852,14 +954,14 @@
       transition: color 0.2s, text-shadow 0.2s;
     }
     .about-studio-link .about-studio-name {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
+      font-family: var(--font-body); /* match the bio paragraphs */
+      font-size: 1rem;
+      font-weight: 500;
       color: var(--color-accent);
     }
     .about-studio-link .about-studio-address {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-family: var(--font-body); /* match the bio paragraphs */
+      font-size: 1rem;
       color: var(--color-accent);
       margin-top: 0.1rem;
     }
@@ -889,7 +991,7 @@
     }
 
     /* ---- Booking ---- */
-    #booking { padding: var(--space-xl) 0; }
+    #booking { padding: var(--space-lg) 0; }
 
     .booking-steps {
       display: grid;
@@ -1113,7 +1215,7 @@
 
     /* ---- Shop ---- */
     #shop {
-      padding: var(--space-xl) 0;
+      padding: var(--space-lg) 0 var(--space-md); /* tighter bottom → less scroll to Contact */
       background: rgba(30, 27, 24, 0.6);
       border-top: 1px solid var(--color-gold-dim);
       border-bottom: 1px solid var(--color-gold-dim);
@@ -1127,7 +1229,7 @@
     }
 
     .shop-header h2 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-size: clamp(2rem, 5vw, 3.2rem); /* match Work/Booking/Contact headings */
       font-weight: 300;
     }
 
@@ -1202,6 +1304,20 @@
       pointer-events: none;
       text-decoration: line-through;
     }
+
+    /* "Ask about this item" — mailto link with the product name prefilled
+       as the email subject, so Shervin knows what the inquiry is about */
+    .shop-item-info .shop-item-ask {
+      display: block;
+      margin-top: 0.5rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-ink-faded);
+    }
+    .shop-item-info .shop-item-ask:hover { color: var(--color-accent); }
 
     /* ---- Checkout Modal — order form then payment instructions ---- */
     .checkout-modal {
@@ -1450,20 +1566,6 @@
       text-shadow: 0 0 10px rgba(212, 184, 106, 0.9);
     }
 
-    .lightbox-close {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: none;
-      border: none;
-      color: var(--color-paper);
-      font-size: 2rem;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-    .lightbox-close:hover { opacity: 1; }
-
     /* Copyright tag — sits ON the bottom edge of the image so it's
        inside any reasonable screenshot crop, not just below the image */
     .lightbox-copyright {
@@ -1499,25 +1601,24 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      /* no box — bare glyph; the button box stays as a generous tap target */
       width: 56px;
       height: 56px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: rgba(0, 0, 0, 0.45);
+      border: none;
+      background: none;
       color: #fff;
-      font-size: 2rem;
+      font-size: 2.4rem;
       line-height: 1;
       cursor: pointer;
       z-index: 210;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      transition: color 0.2s;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8); /* stays readable over bright photos */
     }
     .lightbox-arrow:hover {
-      background: rgba(0, 0, 0, 0.75);
-      border-color: var(--color-accent);
+      color: var(--color-accent-hover);
     }
     .lightbox-arrow.prev { left: 1.25rem; }
     .lightbox-arrow.next { right: 1.25rem; }
@@ -1559,7 +1660,8 @@
         padding: var(--space-md) 0;
       }
       .card-section {
-        padding: var(--space-md) 0 var(--space-sm);
+        /* bottom padding covers the labels hanging below the illustrations */
+        padding: var(--space-md) 0 var(--space-md);
       }
       /* Shrink header-to-content margin on mobile booking too */
       .booking-header {
@@ -1569,14 +1671,42 @@
         margin-bottom: var(--space-sm);
       }
 
-      /* Contact: stack pomegranate → card → skull vertically on mobile */
+      /* Contact: keep the horizontal pomegranate | card | skull row on mobile,
+         scaled to fit one screen width */
       .contact-layout {
-        flex-direction: column;
-        gap: var(--space-md);
+        flex-wrap: nowrap;
+        gap: var(--space-sm);
+        padding: 0 var(--space-sm);
       }
       .contact-side-img {
-        width: 130px;
+        width: clamp(56px, 18vw, 90px);
+        height: auto; /* mobile keeps width-based sizing */
       }
+      .card-scene {
+        width: min(44vw, 200px);
+      }
+      .contact-side-label {
+        /* on mobile the text drops below the card's bottom edge
+           (offset mirrors the mobile .card-scene width formula) */
+        top: calc(50% + min(44vw, 200px) / 3.5 + 0.5rem);
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ---- Touch devices (iPad/iPhone/Android) ----
+       Hover styles stick after taps on touch screens, leaving glows frozen on
+       whatever was last tapped — one source of "glows look different on iPad".
+       Neutralize the hover-only glows where hovering isn't real. */
+    @media (hover: none) {
+      a:hover { text-shadow: none; }
+      .contact-side:hover { transform: none; }
+      .contact-side:hover .contact-side-img {
+        filter: drop-shadow(0 0 10px rgba(212, 184, 106, 0.35));
+      }
+      .contact-side:hover .contact-side-label { text-shadow: none; }
+      .about-studio-link:hover .about-studio-name,
+      .about-studio-link:hover .about-studio-address { text-shadow: none; }
+      .hero-cta:hover, .btn-submit:hover, .about-contact-btn:hover { box-shadow: none; }
     }
 
     /* ---- Animations ---- */
@@ -1636,17 +1766,19 @@
   <nav aria-label="Main navigation">
     <div class="nav-bar">
     <div class="nav-inner">
-      <img src="Shervin_flower_left.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (left) -->
-      <a href="#hero" class="logo">Tattooing by Shervin</a> <!-- EDIT: nav brand text -->
+      <div class="nav-brand">
+        <img src="Shervin_flower_left.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (left) -->
+        <a href="#hero" class="logo">Tattooing by Shervin</a> <!-- EDIT: nav brand text -->
+        <img src="Shervin_flower_right.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (right) -->
+      </div>
       <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
       <ul class="nav-links">
         <li><a href="#about">About</a><!-- EDIT: nav label: About --></li>
         <li><a href="#work">Work</a><!-- EDIT: nav label: Work --></li>
         <li><a href="#booking">Booking</a><!-- EDIT: nav label: Booking --></li>
-        <li><a href="#shop">Shop</a><!-- EDIT: nav label: Shop --></li>
+        <li><a href="#shop">Bazaar</a><!-- EDIT: nav label: Shop --></li>
         <li><a href="#contact">Contact</a><!-- EDIT: nav label: Contact --></li>
       </ul>
-      <img src="Shervin_flower_right.png" alt="" class="nav-flower" aria-hidden="true"> <!-- EDIT: nav flower image (right) -->
     </div>
     </div>
   </nav>
@@ -1657,7 +1789,7 @@
   <!-- ======== HERO ======== -->
   <!-- EDIT: HERO — change the background video file, logo image, tagline, location, and CTA text -->
   <section id="hero">
-    <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="hero-poster.jpg">
       <source src="hero-video.mp4" type="video/mp4"> <!-- EDIT: hero background video filename -->
     </video>
     <div class="hero-content fade-in">
@@ -1666,7 +1798,6 @@
       <p class="hero-location">San Francisco, California</p> <!-- EDIT: location -->
       <div class="hero-cta-group">
         <a href="#booking" class="hero-cta">Book a Tattoo</a> <!-- EDIT: CTA button text -->
-        <p class="hero-cta-subtitle">Talismans and Amulets for Protection and Peace</p> <!-- EDIT: subtitle -->
         <p class="hero-farsi" lang="fa" dir="rtl">یکی بود یکی نبود، فقط شما &#x26B1;</p> <!-- EDIT: Farsi text -->
       </div>
     </div>
@@ -1681,15 +1812,15 @@
           <img src="shervin_polaroid_bycweird.jpeg" alt="Shervin — tattoo artist portrait, San Francisco"> <!-- EDIT: portrait photo filename -->
         </div>
         <div class="about-text fade-in">
-          <p class="label">About</p> <!-- EDIT: eyebrow label (About) -->
-          <h2>Shervin</h2> <!-- EDIT: name -->
+          <p class="label">About &middot; درباره</p> <!-- EDIT: eyebrow label (About) -->
+          <h2>Shervin &middot; شروین</h2> <!-- EDIT: name -->
           <!-- EDIT: bio paragraphs — change/add/remove <p> tags as needed -->
           <p>Born and raised in the San Francisco Bay Area, Shervin Is an Iranian American Tattooer and Artist rooted in heavy traditional forms from a multitude of backgrounds. By bringing together West Asian and West Coast influences, along side his many travels and studies, these amulets are truly one of a kind for those who are kind enough to support this vast sharing of cultures.</p>
           <p>Bookings area always open below and walk-in’s are open based on availability Thurs-Sun 1pm-5pm</p> <!-- EDIT: walk-in hours line -->
 
           <div class="about-details">
             <div class="about-detail">
-              <p class="label">Based In</p> <!-- EDIT: detail label (Based In) -->
+              <p class="label">Based In &middot; مستقر در</p> <!-- EDIT: detail label (Based In) -->
               <span>San Francisco, California</span> <!-- EDIT: city -->
               <!-- EDIT: studio name, address, and Google Maps link -->
               <a href="https://www.google.com/maps/search/?api=1&amp;query=Analog+Tattoo+Art+Kolectiv+1038+Larkin+St+San+Francisco+CA+94109" target="_blank" rel="noopener" class="about-studio-link">
@@ -1698,7 +1829,7 @@
               </a>
             </div>
             <div class="about-detail">
-              <p class="label">Specialties</p> <!-- EDIT: detail label (Specialties) -->
+              <p class="label">Specialties &middot; تخصص‌ها</p> <!-- EDIT: detail label (Specialties) -->
               <!-- EDIT: specialties list — use &amp; for the & symbol -->
               <span>Color, Black &amp; Grey, Traditional, Japanese, West Asian, Persian, Illustrative, Tribal, Ornamental, Custom, Freehand</span>
             </div>
@@ -1728,7 +1859,7 @@
   <section id="work">
     <div class="container">
       <div class="work-header">
-        <h2 class="fade-in">Work</h2> <!-- EDIT: work section heading -->
+        <h2 class="fade-in">Work &middot; آثار</h2> <!-- EDIT: work section heading -->
       </div>
 
       <!-- EDIT: FILTER BUTTONS — add/remove/rename filter categories here.
@@ -1741,8 +1872,9 @@
       </div>
 
       <div class="carousel-wrap fade-in" id="gallery-carousel">
-        <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous">&#8249;</button>
-        <button class="carousel-arrow next" id="carousel-next" aria-label="Next">&#8250;</button>
+        <button class="carousel-arrow prev" id="carousel-prev" aria-label="Previous">❮</button>
+        <button class="carousel-arrow next" id="carousel-next" aria-label="Next">❯</button>
+        <div class="carousel-window">
         <div class="carousel-track" id="carousel-track">
           <!-- EDIT: GALLERY ITEMS — each line below is one portfolio piece.
                The carousel auto-paginates them 6 per page. -->
@@ -1774,6 +1906,7 @@
             <div class="gallery-item" data-category="flash"><img src="Work/21.jpg" alt="Tattoo work by Shervin" loading="lazy"></div>
           </div>
         </div>
+        </div><!-- /.carousel-window -->
         <div class="carousel-dots" id="carousel-dots"></div>
       </div>
     </div>
@@ -1784,7 +1917,7 @@
   <section id="booking">
     <div class="container">
       <div class="booking-header fade-in">
-        <h2>Booking</h2> <!-- EDIT: booking section heading -->
+        <h2>Booking &middot; رزرو</h2> <!-- EDIT: booking section heading -->
         <p class="booking-subhead">Get Tattooed</p> <!-- EDIT: subheading -->
         <!-- EDIT: booking intro text -->
         <p>Thank you for your interest in booking. I'm grateful and excited to hear of your ideas for your next tattoo. Please fill out the form the best of your ability and if approved we can move on to the next steps. Feel free to mention anything not listed and please be patient with all responses as I am a one man operation. Always with love and respect &#x1F64F;&#x1F3FD;&#x1F4FF;&#x1F33F;</p>
@@ -2006,7 +2139,7 @@
   <section id="shop">
     <div class="container">
       <div class="shop-header">
-        <h2 class="fade-in">Shop</h2> <!-- EDIT: shop section heading -->
+        <h2 class="fade-in">Bazaar &middot; بازار</h2> <!-- EDIT: shop section heading -->
         <p class="label fade-in">Prints &amp; merch</p> <!-- EDIT: shop eyebrow label -->
       </div>
 
@@ -2017,6 +2150,7 @@
             <h3>Limited Edition Flash Sheet 1/50</h3>
             <p class="price">$80</p>
             <button class="btn-buy" data-checkout="open" data-product="Limited Edition Flash Sheet 1/50" data-price="80" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <div class="shop-item fade-in">
@@ -2025,6 +2159,7 @@
             <h3>&ldquo;DIASPORA&rdquo; Limited Edition Shirt</h3>
             <p class="price">$40</p>
             <button class="btn-buy" data-checkout="open" data-product="&quot;DIASPORA&quot; Limited Edition Shirt" data-price="40" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <div class="shop-item fade-in">
@@ -2033,6 +2168,7 @@
             <h3>Stoneware Vessel Vol. 1</h3>
             <p class="price">$120</p>
             <button class="btn-buy" data-checkout="open" data-product="Stoneware Vessel Vol. 1" data-price="120" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <div class="shop-item fade-in">
@@ -2041,6 +2177,7 @@
             <h3>Original Sketches</h3>
             <p class="price">$100</p>
             <button class="btn-buy" data-checkout="open" data-product="Original Sketches" data-price="100" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
       </div>
@@ -2050,9 +2187,9 @@
 
   <!-- ======== LIGHTBOX ======== -->
   <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
-    <button class="lightbox-arrow prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
-    <button class="lightbox-arrow next" id="lightbox-next" aria-label="Next">&#8250;</button>
+    <!-- No close button: tapping the image (or the backdrop, or Esc) closes -->
+    <button class="lightbox-arrow prev" id="lightbox-prev" aria-label="Previous">❮</button>
+    <button class="lightbox-arrow next" id="lightbox-next" aria-label="Next">❯</button>
     <div class="lightbox-media" id="lightbox-media">
       <img id="lightbox-img" src="" alt="">
       <div class="lightbox-copyright">&copy; Shervin Tattoo &middot; All rights reserved</div>
@@ -2065,7 +2202,7 @@
   <section class="card-section" id="contact">
     <div class="container">
       <div class="contact-header fade-in">
-        <h2>Contact</h2> <!-- EDIT: contact section heading -->
+        <h2>Contact &middot; تماس</h2> <!-- EDIT: contact section heading -->
       </div>
     </div>
     <div class="contact-layout">
@@ -2203,12 +2340,82 @@
     </div>
   </div>
 
+  <!-- ======== CONTACT MODAL ========
+       Opens from the Contact section's Email illustration and from the shop
+       "Ask about this item" links (which keep mailto: as a no-JS fallback).
+       Submits to Netlify Forms as "contact" — works for visitors who use
+       webmail in a browser and would get nothing from a mailto: link.
+       Reuses the checkout modal's shell styles. -->
+  <div class="checkout-modal" id="contact-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="checkout-modal-card">
+      <button class="checkout-modal-close" id="contact-modal-close" aria-label="Close">&times;</button>
+
+      <div class="checkout-step" id="contact-step-form">
+        <h3>Contact Shervin</h3>
+        <p class="checkout-product-summary" id="contact-product-summary"></p>
+
+        <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="hp-field" aria-hidden="true">
+            <label for="contact-website">Website</label>
+            <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <input type="hidden" name="product" id="contact-product-field">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name">Name *</label>
+              <input type="text" id="contact-name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email *</label>
+              <input type="email" id="contact-email" name="email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-inquiry">What's this about? *</label>
+            <!-- Option values are the readable labels on purpose: they land
+                 verbatim in the Netlify notification email Shervin reads -->
+            <select id="contact-inquiry" name="inquiry_type" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="Tattoo question">Tattoo question</option>
+              <option value="Shop item">Shop item</option>
+              <option value="Ceramics &amp; one-off pieces">Ceramics &amp; one-off pieces</option>
+              <option value="Custom artwork / commission">Custom artwork / commission</option>
+              <option value="Guest spot / travel">Guest spot / travel</option>
+              <option value="Art licensing / press">Art licensing / press</option>
+              <option value="Something else">Something else</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message">Message *</label>
+            <textarea id="contact-message" name="message" required rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="checkout-step" id="contact-step-success" style="display:none;">
+        <h3>Message sent</h3>
+        <div class="checkout-payment-content">
+          <p>Thanks for reaching out &mdash; your message is on its way to Shervin.</p>
+        </div>
+        <button type="button" class="btn-submit checkout-modal-done" id="contact-modal-done">Done</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ======== FOOTER / PARCHMENT BAR ======== -->
   <!-- EDIT: FOOTER — copyright year and name -->
   <footer>
     <div class="footer-bar">
       <div class="footer-inner">
-        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site + Headshot by <a href="https://cweird.com" rel="noopener">c.weird:</a></p> <!-- EDIT: copyright year -->
+        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site + Headshot by <a href="https://cweird.com" target="_blank" rel="noopener">c.weird:</a></p> <!-- EDIT: copyright year -->
       </div>
     </div>
   </footer>
@@ -2652,14 +2859,19 @@
       const lb = document.getElementById('lightbox');
       const prevBtn = document.getElementById('lightbox-prev');
       const nextBtn = document.getElementById('lightbox-next');
-      const closeBtn = document.getElementById('lightbox-close');
       if (!lb) return;
 
-      // Close only when the dark backdrop is clicked, not the image/buttons
+      // Close on backdrop click OR on tapping the image itself (no X button).
+      // A swipe doesn't fire a click, so swipe-to-navigate still works; videos
+      // are exempt so their playback controls stay usable — backdrop/Esc
+      // closes those.
       lb.addEventListener('click', e => {
         if (e.target === lb) closeLightbox();
       });
-      if (closeBtn) closeBtn.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
+      document.getElementById('lightbox-img').addEventListener('click', e => {
+        e.stopPropagation();
+        closeLightbox();
+      });
       if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); lightboxPrev(); });
       if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); lightboxNext(); });
 
@@ -2879,6 +3091,167 @@
         });
       }, { threshold: 0.25 });
       vids.forEach(v => io.observe(v));
+    })();
+
+    // ---- Contact Modal ----
+    // The Email illustration and the shop "Ask about this item" links open a
+    // Netlify Forms contact form instead of firing their mailto: hrefs —
+    // mailto is dead weight for visitors who read email in a browser. The
+    // hrefs stay in the HTML as a no-JS fallback (and so the client editor
+    // still shows a plain email address to edit). Inquiry type + product
+    // fields tell Shervin what the message is about.
+    (() => {
+      const modal = document.getElementById('contact-modal');
+      if (!modal) return;
+      const closeBtn = document.getElementById('contact-modal-close');
+      const doneBtn = document.getElementById('contact-modal-done');
+      const form = document.getElementById('contact-form');
+      const stepForm = document.getElementById('contact-step-form');
+      const stepSuccess = document.getElementById('contact-step-success');
+      const summary = document.getElementById('contact-product-summary');
+      const productField = document.getElementById('contact-product-field');
+      const inquirySelect = document.getElementById('contact-inquiry');
+
+      let formLoadedAt = 0;
+      const MIN_FILL_SECONDS = 3;
+
+      function open(prefill) {
+        productField.value = prefill && prefill.product ? prefill.product : '';
+        summary.textContent = productField.value ? 'About: ' + productField.value : '';
+        summary.style.display = productField.value ? '' : 'none';
+        if (prefill && prefill.inquiry) inquirySelect.value = prefill.inquiry;
+        stepForm.style.display = '';
+        stepSuccess.style.display = 'none';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        formLoadedAt = Date.now();
+      }
+
+      function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        form.reset();
+      }
+
+      function showSuccess() {
+        stepForm.style.display = 'none';
+        stepSuccess.style.display = '';
+      }
+
+      // Contact section Email link — small delay so the coin-spin tap
+      // feedback is visible before the modal covers it
+      document.querySelectorAll('a.contact-side[href^="mailto:"]').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          setTimeout(() => open(null), 400);
+        });
+      });
+
+      // Shop "Ask about this item" links — prefill inquiry + product name
+      // (read live from the item's title so editor renames stay in sync)
+      document.querySelectorAll('.shop-item .shop-item-ask').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          const title = a.closest('.shop-item-info')?.querySelector('h3')?.textContent.trim();
+          open({ inquiry: 'Shop item', product: title || '' });
+        });
+      });
+
+      // Close handlers
+      modal.addEventListener('click', e => { if (e.target === modal) close(); });
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      if (doneBtn) doneBtn.addEventListener('click', close);
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+      });
+
+      // Submit — same anti-spam pattern as the shop-order form
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const honeypot = form.querySelector('input[name="website"]');
+        const tooFast = (Date.now() - formLoadedAt) / 1000 < MIN_FILL_SECONDS;
+        if ((honeypot && honeypot.value.trim() !== '') || tooFast) {
+          // Silent success — bots think they got through
+          showSuccess();
+          return;
+        }
+        fetch('/', { method: 'POST', body: new FormData(form) })
+          .then(showSuccess)
+          .catch(showSuccess);
+      });
+    })();
+
+    // ---- Hero lockup: width matching ----
+    // "San Francisco, California" letterspaces out until it's exactly as wide
+    // as the tagline above it (justified lockup), and the Book a Tattoo button
+    // takes that same width. Re-runs on font load and resize, and adapts if
+    // the tagline/location text is edited.
+    (() => {
+      const tag = document.querySelector('.hero-tagline');
+      const loc = document.querySelector('.hero-location');
+      const cta = document.querySelector('.hero-cta');
+      if (!tag || !loc) return;
+      function fit() {
+        loc.style.letterSpacing = '';
+        loc.style.marginRight = '';
+        const target = tag.getBoundingClientRect().width;
+        const chars = loc.textContent.trim().length;
+        if (!chars || !target) return;
+        const cur = loc.getBoundingClientRect().width;
+        const curLS = parseFloat(getComputedStyle(loc).letterSpacing) || 0;
+        const ls = Math.max(0, curLS + (target - cur) / chars);
+        loc.style.letterSpacing = ls.toFixed(2) + 'px';
+        /* letter-spacing also trails the last character — pull it back so the
+           line stays optically centered and flush with the tagline */
+        loc.style.marginRight = (-ls).toFixed(2) + 'px';
+        if (cta) cta.style.width = Math.round(target) + 'px';
+      }
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      window.addEventListener('load', fit);
+      window.addEventListener('resize', fit);
+    })();
+
+    // ---- Coin-spin for contact illustrations ----
+    // Wraps each illustration in a 3D rotor at runtime (keeps the source
+    // markup and its EDIT marker untouched) and spins it like a coin on
+    // tap/click. Back face = black silhouette of the same artwork.
+    (() => {
+      document.querySelectorAll('.contact-side-img').forEach(img => {
+        const wrap = document.createElement('span');
+        wrap.className = 'coin-wrap';
+        const rotor = document.createElement('span');
+        rotor.className = 'coin-rotor';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(rotor);
+        rotor.appendChild(img);
+        const back = document.createElement('img');
+        back.src = img.getAttribute('src');
+        back.alt = '';
+        back.setAttribute('aria-hidden', 'true');
+        back.className = 'coin-back';
+        rotor.appendChild(back);
+      });
+      document.querySelectorAll('.contact-side').forEach(a => {
+        a.addEventListener('click', e => {
+          const rotor = a.querySelector('.coin-rotor');
+          if (!rotor) return;
+          rotor.classList.remove('spinning');
+          void rotor.offsetWidth; /* restart the animation on rapid re-taps */
+          rotor.classList.add('spinning');
+          // External links (Instagram): hold navigation a beat so the spin
+          // is visible before the new tab takes focus
+          if (a.target === '_blank') {
+            e.preventDefault();
+            setTimeout(() => {
+              const w = window.open(a.href, '_blank', 'noopener');
+              if (!w) location.href = a.href; /* popup blocked → same tab */
+            }, 400);
+          }
+        });
+      });
     })();
 
     // ---- Smooth scroll ----
