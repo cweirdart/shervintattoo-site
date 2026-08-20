@@ -3247,10 +3247,14 @@
       function fit() {
         loc.style.letterSpacing = '';
         loc.style.marginRight = '';
-        const target = tag.getBoundingClientRect().width;
+        loc.style.whiteSpace = 'nowrap';
         const chars = loc.textContent.trim().length;
-        if (!chars || !target) return;
         const cur = loc.getBoundingClientRect().width;
+        /* never letterspace past the container — on narrow phones that
+           wrapped the line in two */
+        const avail = loc.parentElement.clientWidth - 64;
+        const target = Math.min(tag.getBoundingClientRect().width, avail);
+        if (!chars || !target) return;
         const curLS = parseFloat(getComputedStyle(loc).letterSpacing) || 0;
         const ls = Math.max(0, curLS + (target - cur) / chars);
         loc.style.letterSpacing = ls.toFixed(2) + 'px';
