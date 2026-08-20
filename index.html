@@ -1887,7 +1887,7 @@
           <!-- EDIT: GALLERY ITEMS — each line below is one portfolio piece.
                The carousel auto-paginates them 6 per page. -->
           <div class="carousel-page">
-            <div class="gallery-item gallery-item--captioned" data-category="flash"><video src="hero-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+            <div class="gallery-item gallery-item--captioned" data-category="flash"><video src="hero-video.mp4" poster="hero-poster.jpg" muted loop playsinline webkit-playsinline preload="auto"></video>
               <p class="gallery-caption">300+ pages of flash&mdash;<a href="#booking">Book</a> to view in person</p>
             </div>
             <div class="gallery-item"><img src="Work/1%20Shervin_tattooing_byextraekster.jpg" alt="" loading="lazy"></div>
@@ -2818,10 +2818,16 @@
           lbVid.setAttribute('controls', '');
           lbVid.setAttribute('autoplay', '');
           lbVid.setAttribute('muted', '');
+          /* the attribute only sets the DEFAULT — the live property must be
+             set too, or Android/Chrome treats it as unmuted and blocks
+             autoplay, leaving a black box */
+          lbVid.muted = true;
           lbVid.setAttribute('playsinline', '');
+          lbVid.setAttribute('webkit-playsinline', '');
           // Insert before the copyright element so © stays on top
           lbMedia.insertBefore(lbVid, lbMedia.querySelector('.lightbox-copyright'));
         }
+        lbVid.poster = itemVid.getAttribute('poster') || '';
         lbVid.src = itemVid.src;
         lbVid.style.display = 'block';
         lbImg.style.display = 'none';
