@@ -3319,8 +3319,13 @@
           if (a.target === '_blank' && !window.matchMedia('(hover: none)').matches) {
             e.preventDefault();
             setTimeout(() => {
-              const w = window.open(a.href, '_blank', 'noopener');
-              if (!w) location.href = a.href; /* popup blocked → same tab */
+              /* NOTE: window.open with a 'noopener' FEATURE returns null even
+                 on success (no handle exists without an opener link), which
+                 made the blocked-fallback also navigate this tab. Open plain,
+                 then sever the opener by hand — null now really means blocked. */
+              const w = window.open(a.href, '_blank');
+              if (w) { try { w.opener = null; } catch (err) {} }
+              else location.href = a.href; /* popup blocked → same tab */
             }, 400);
           }
         });
