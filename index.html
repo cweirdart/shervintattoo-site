@@ -1280,6 +1280,13 @@
       margin-bottom: 0.2rem;
     }
 
+    .shop-item-info .shop-item-description {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-ink-light);
+      margin-bottom: 0.2rem;
+    }
+
     .shop-item-info .price {
       font-family: var(--font-mono);
       font-size: 0.85rem;
@@ -1887,7 +1894,7 @@
           <!-- EDIT: GALLERY ITEMS — each line below is one portfolio piece.
                The carousel auto-paginates them 6 per page. -->
           <div class="carousel-page">
-            <div class="gallery-item gallery-item--captioned" data-category="flash"><video src="hero-video.mp4" muted loop playsinline webkit-playsinline preload="auto"></video>
+            <div class="gallery-item gallery-item--captioned" data-category="flash"><video src="hero-video.mp4" poster="hero-poster.jpg" muted loop playsinline webkit-playsinline preload="auto"></video>
               <p class="gallery-caption">300+ pages of flash&mdash;<a href="#booking">Book</a> to view in person</p>
             </div>
             <div class="gallery-item"><img src="Work/1%20Shervin_tattooing_byextraekster.jpg" alt="" loading="lazy"></div>
@@ -2164,27 +2171,30 @@
 
       <div class="shop-grid">
         <div class="shop-item fade-in">
-          <div class="shop-item-image"></div>
+          <div class="shop-item-image">Available</div>
           <div class="shop-item-info">
             <h3>Limited Edition Flash Sheet 1/50</h3>
             <p class="price">$80</p>
-            <button class="btn-buy" data-product="Limited Edition Flash Sheet 1/50" data-price="80" data-checkout="open">Buy Now</button>
+            <button class="btn-buy" data-checkout="open" data-product="Limited Edition Flash Sheet 1/50" data-price="80" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image"></div>
+          <div class="shop-item-image">Available</div>
           <div class="shop-item-info">
             <h3>&ldquo;DIASPORA&rdquo; Limited Edition Shirt</h3>
             <p class="price">$40</p>
-            <button class="btn-buy" data-product="&amp;ldquo;DIASPORA&amp;rdquo; Limited Edition Shirt" data-price="40" data-checkout="open">Buy Now</button>
+            <button class="btn-buy" data-checkout="open" data-product="&quot;DIASPORA&quot; Limited Edition Shirt" data-price="40" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <div class="shop-item fade-in">
-          <div class="shop-item-image"></div>
+          <div class="shop-item-image">Available</div>
           <div class="shop-item-info">
             <h3>Stoneware Vessel Vol. 1</h3>
             <p class="price">$120</p>
-            <button class="btn-buy" data-product="Stoneware Vessel Vol. 1" data-price="120" data-checkout="open">Buy Now</button>
+            <button class="btn-buy" data-checkout="open" data-product="Stoneware Vessel Vol. 1" data-price="120" data-payment-method="venmo" data-venmo-handle="@shervin510">Buy Now</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <div class="shop-item fade-in">
@@ -2194,6 +2204,7 @@
             <p class="shop-item-description">graphite-2026</p>
             <p class="price">$150</p>
             <button class="btn-buy sold-out" data-product="Original Sketches" data-price="150" disabled>Sold Out</button>
+            <a class="shop-item-ask" href="mailto:shervinx510@gmail.com">Ask about this item</a>
           </div>
         </div>
         <!-- client-editor: built-in checkout modal skipped (this file has its own <form name="shop-order">). -->
@@ -2436,8 +2447,15 @@
   <footer>
     <div class="footer-bar">
       <div class="footer-inner">
-        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site + Headshot by <a href="https://cweird.com" target="_blank" rel="noopener">c.weird:</a></p> <!-- EDIT: copyright year -->
-   &copy; 2026 shervintattoo.com. Site by <a href="https://cweird.com" target="_blank" rel="noopener">c.weird:</a>er = new IntersectionObserver((entries) => {
+        <p class="footer-credit">&copy; 2026 shervintattoo.com. Site by <a href="https://cweird.com" target="_blank" rel="noopener">c.weird:</a></p> <!-- EDIT: copyright year -->
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== SCRIPTS ======== -->
+  <script>
+    // ---- Scroll Animations ----
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
